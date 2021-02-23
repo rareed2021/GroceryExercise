@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="detail_title">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="detail_description">
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="detail_price">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="user_edit">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="text_error">
+        <item name="android:textColor">@color/error_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="welcome_text">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="welcome_clickable" parent="welcome_text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/header</item>
+    </style>
+
+    <style name="cart_text">
+    </style>
+    <style name="cart_label" parent="cart_text">
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="cart_text_value" parent="cart_text">
+        <item name="android:titleMarginEnd">12dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="cart_price_text">
+
+    </style>
+    <style name="cart_price" parent="cart_price_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cart_mrp" parent="cart_price_text">
+        <item name="android:textSize">10sp</item>
+        <item name="paddingEnd">12dp</item>
+    </style>
+
+    <style name="cart_product_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cart_amount">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:layout_marginStart">6dp</item>
+    </style>
+</resources>

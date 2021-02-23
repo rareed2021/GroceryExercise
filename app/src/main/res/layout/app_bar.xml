@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.Toolbar android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:background="?android:colorPrimary"
+    app:titleTextColor="@color/icon_light"
+    app:subtitleTextColor="@color/icon_light"
+    android:theme="@style/Theme.GroceryExercise.ActionBarTheme"
+    style="@style/Theme.GroceryExercise.ActionBarTheme"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

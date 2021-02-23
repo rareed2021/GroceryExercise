@@ -1,0 +1,12 @@
+<TextView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/text_subcat_name"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:layout_marginBottom="6dp"
+    android:layout_marginTop="6dp"
+    android:padding="8dp"
+    android:background="#333"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>

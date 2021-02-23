@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/item_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="14dp"
+        android:layout_marginLeft="14dp"
+        android:padding="12dp"
+        android:background="?android:colorBackground"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            style="@style/user_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email" />
+
+
+        <EditText
+            android:id="@+id/edit_password"
+            style="@style/user_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/hint_password" />
+
+        <TextView
+            android:id="@+id/text_error"
+            style="@style/text_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login" />
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="center"
+            android:background="@color/divider"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/new_user"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/register_to_login"
+            android:textColor="@color/header"
+            android:id="@+id/text_register"
+            />
+    </LinearLayout>
+</LinearLayout>
