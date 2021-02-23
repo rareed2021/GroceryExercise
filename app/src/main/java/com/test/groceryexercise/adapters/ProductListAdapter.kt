@@ -58,6 +58,7 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
             Picasso.get()
                 .load(Config.IMAGE_BASE + product.image)
                 .resize(80, 80)
+                .placeholder(R.drawable.ic_baseline_fastfood_24)
                 .into(itemView.image_product)
             itemView.setOnClickListener {
                 val intent = Intent(context, ProductDetailActivity::class.java)
