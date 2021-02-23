@@ -15,6 +15,7 @@ import com.test.groceryexercise.fragments.AddButtonFragment
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.Product
 import kotlinx.android.synthetic.main.fragment_add_button.view.*
+import kotlinx.android.synthetic.main.plus_minus_button.view.*
 
 class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Boolean=false) {
     var mProduct : Product? =null
@@ -23,6 +24,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
     var db :DBHelper = DBHelper(context)
     var showFull = alwaysShow
     var mBinding : PlusMinusButtonBinding?=null
+    var mView :View? = null
     private var handler : ((Int)->Unit)? = null
     constructor(context:Context, product: Product) : this(context, product._id){
         mProduct = product
@@ -50,6 +52,19 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
 
 
 
+
+    fun init(view:View){
+        val product = mProduct
+        mView = view
+        if(mItem==null && product!=null){
+            mItem = db.getCartItem(product._id)
+        }
+        setupVisible(view.layout_full, view.text_amount, view.button_add)
+        setupAddButton(view.button_add)
+        setupMinusButton(view.button_minus)
+        setupPlusButton(view.button_plus)
+
+    }
     fun init(binding:PlusMinusButtonBinding){
         mBinding = binding
         val product = mProduct
@@ -61,6 +76,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         setupMinusButton(binding.buttonMinus)
         setupPlusButton(binding.buttonPlus)
     }
+
 
     private fun setupPlusButton(buttonPlus: TextView) {
         buttonPlus.setOnClickListener {
@@ -124,6 +140,14 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
     }
 
     private fun setupVisible(layout:View, amount:TextView, button:View){
+        val id = itemId
+        val item = db.getCartItem(id)
+        if(item!=null){
+            mItem = item
+        }
+        if((mItem?.amount?:0)>0){
+            showFull=true
+        }
         if(showFull){
             layout.visibility=View.VISIBLE
             button.visibility=View.GONE
@@ -134,19 +158,14 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         }
     }
     private fun setupVisible(){
-        val id = itemId
-        val item = db.getCartItem(id)
-        if(item!=null){
-            mItem = item
-        }
         Log.d("myApp","Setting up ${mItem?.amount}")
-        if((mItem?.amount?:0)>0){
-            showFull=true
-        }
         val bind = mBinding
+        val view=mView
         if(bind !=null){
             Log.d("myApp","Binding fragment")
             setupVisible(bind.layoutFull, bind.textAmount, bind.buttonAdd)
+        }else if (view!=null){
+            setupVisible(view.layout_full, view.text_amount, view.button_add)
         }
     }
 }

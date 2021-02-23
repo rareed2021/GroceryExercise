@@ -64,8 +64,8 @@ class AddButtonFragment : Fragment() {
                 }
             }
             Log.d("myApp","View items ${view.button_items}")
-            val binding = PlusMinusButtonBinding.bind(view.button_items)
-            adapter?.init(binding)
+            //val binding = PlusMinusButtonBinding.bind(view.button_items)
+            adapter?.init(view.button_items)
         }
     }
 

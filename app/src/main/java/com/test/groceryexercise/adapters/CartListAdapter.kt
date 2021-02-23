@@ -29,8 +29,12 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
             itemView.text_product_name.text = product.productName
             //itemView.text_amount.text = product.amount.toString()
             val binding = PlusMinusButtonBinding.bind(itemView.change_amount)
-            val amountButtonAdapter = AmountButtonAdapter(context, product._id, true)
-            amountButtonAdapter.init(binding)
+            val amountButtonAdapter = AmountButtonAdapter(context, product, true)
+            amountButtonAdapter.init(itemView.change_amount)
+            amountButtonAdapter.setOnAmountChangedListener {
+                mData[adapterPosition].amount=it
+                update()
+            }
             if(product.mrp != product.price){
                 itemView.text_mrp.visibility=View.VISIBLE
                 itemView.text_mrp.text = "\$${product.mrp}"
@@ -47,12 +51,6 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
                 db.removeFromCart(product._id)
                 mData.removeAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
-                update()
-            }
-            val adapter = AmountButtonAdapter(context, product, true)
-            adapter.init(binding)
-            adapter.setOnAmountChangedListener {
-                mData[adapterPosition].amount=it
                 update()
             }
         }
