@@ -36,10 +36,12 @@ class MainActivity : ListingActivity() {
     lateinit var mQueue: RequestQueue
     //lateinit var cache: LruBitmapCache
     var user: User? = null
+    override val contentResource: Int = R.layout.activity_main
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        setContentView(R.layout.activity_main)
-        init(savedInstanceState)
+        //setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
+        init(savedInstanceState)
     }
 
     private fun init(savedInstanceState: Bundle?) {

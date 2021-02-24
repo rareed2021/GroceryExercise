@@ -16,9 +16,11 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.activity_product_detail.text_price
 class ProductDetailActivity : ListingActivity() {
     lateinit var mProduct : Product
+    override val contentResource: Int
+        get() = R.layout.activity_product_detail
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_detail)
+        //setContentView(R.layout.activity_product_detail)
         mProduct = intent.getSerializableExtra(Product.KEY) as Product
         init()
     }

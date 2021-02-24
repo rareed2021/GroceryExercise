@@ -26,9 +26,12 @@ class CatListingActivity : ListingActivity() {
     lateinit var mCategory : Category
     var mSubcats : List<SubCategory>? = null
     var mProducts : List<Product>? = null
+    override val contentResource: Int
+        get() = R.layout.activity_cat_listing
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cat_listing)
+        //setContentView(R.layout.activity_cat_listing)
         init()
     }
 

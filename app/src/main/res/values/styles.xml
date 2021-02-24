@@ -89,4 +89,10 @@
         <item name="android:layout_marginStart">6dp</item>
     </style>
 
+    <style name="nav_header">
+        <item name="android:padding">22dp</item>
+        <item name="android:background">@color/header</item>
+        <item name="android:textColor">@color/header_text</item>
+    </style>
+
 </resources>

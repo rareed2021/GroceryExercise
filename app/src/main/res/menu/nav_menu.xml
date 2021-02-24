@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+
+        <item
+            android:id="@+id/menu_account"
+            android:title="My Account" />
+        <item
+            android:id="@+id/menu_order"
+            android:title="My Orders" />
+        <item
+            android:id="@+id/menu_address"
+            android:title="My Address" />
+
+    </group>
+    <group>
+    <item
+        android:id="@+id/menu_rate"
+        android:title="Rate our app" />
+
+    <item
+        android:id="@+id/menu_help"
+        android:title="Need Help?" />
+
+    <item
+        android:id="@+id/menu_refer"
+        android:title="Refer and Earn" />
+</group>
+</menu>
