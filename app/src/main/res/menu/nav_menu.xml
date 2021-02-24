@@ -3,6 +3,10 @@
     <group>
 
         <item
+            android:id="@+id/menu_signin"
+            android:title="Sign In"
+            />
+        <item
             android:id="@+id/menu_account"
             android:title="My Account" />
         <item

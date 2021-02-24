@@ -18,6 +18,8 @@ class ProductDetailActivity : ListingActivity() {
     lateinit var mProduct : Product
     override val contentResource: Int
         get() = R.layout.activity_product_detail
+    override val showBackButton: Boolean
+        get() = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_product_detail)

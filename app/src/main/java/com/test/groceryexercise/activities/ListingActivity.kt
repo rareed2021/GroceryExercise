@@ -20,12 +20,14 @@ import com.test.groceryexercise.app.SessionManager
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.nav_drawer.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import kotlin.math.sign
 
 abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     protected lateinit var dbHelper: DBHelper
     protected lateinit var drawerLayout: DrawerLayout
     protected lateinit var navigationView: NavigationView
     abstract val contentResource : Int
+    open val showBackButton:Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //val content :View = findViewById(R.id.content)
@@ -51,7 +53,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         navigationView.setNavigationItemSelectedListener(this)
         setHeaderUI()
         val bar = toolbar
-        if(bar!=null) {
+        if(bar!=null && !showBackButton) {
             val toggle = ActionBarDrawerToggle(this, drawerLayout, bar, 0,0)
             drawerLayout.addDrawerListener(toggle)
             toggle.syncState()
@@ -62,32 +64,41 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         val header = navigationView.getHeaderView(0)
         val session = SessionManager(this)
         val user = session.user
+        val loggedIn =  user!=null
         if(header!=null) {
-            header.text_email.text = user?.email?:""
+            val email  = user?.email?:""
+            header.text_email.text = email
+            header.text_email.visibility= if(email=="")View.GONE else View.VISIBLE
             header.text_name.text = user?.firstName?:"Guest"
         }
+        val menu = navigationView.menu
+        val signin = menu.findItem(R.id.menu_signin)
+        val account = menu.findItem(R.id.menu_account)
+        signin.isVisible = !loggedIn
+        account.isVisible = loggedIn
     }
 
     open fun setupToolbar(bar:Toolbar){
         setSupportActionBar(bar)
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if (showBackButton)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val sessionManager = SessionManager(this)
         val user = sessionManager.user
         val loggedIn =  user!=null
-        val welcome = menu?.findItem(R.id.menu_welcome)
-        welcome?.isVisible = loggedIn
+        //val welcome = menu?.findItem(R.id.menu_welcome)
+        //welcome?.isVisible = loggedIn
         val logout = menu?.findItem(R.id.menu_logout)
         logout?.isVisible = loggedIn
-        val login = menu?.findItem(R.id.menu_login)
-        login?.isVisible = !loggedIn
+        //val login = menu?.findItem(R.id.menu_login)
+        //login?.isVisible = !loggedIn
         val cart = menu?.findItem(R.id.menu_cart)
         cart?.title = "(${dbHelper.cartSize})"
-        if(user!=null) {
+        /*if(user!=null) {
             welcome?.title = "Welcome ${user.firstName}"
-        }
+        }*/
         return true
     }
 
@@ -95,7 +106,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         when(item.itemId){
             android.R.id.home -> finish()
             R.id.menu_cart -> startActivity(Intent(this, ShowCartActivity::class.java))
-            R.id.menu_login -> startActivity(Intent(this, LoginActivity::class.java))
+            //R.id.menu_signin -> startActivity(Intent(this, LoginActivity::class.java))
             R.id.menu_logout -> {
                 val session = SessionManager(this)
                 session.user=null
@@ -115,6 +126,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
             R.id.menu_refer -> Toast.makeText(this, "Refer",Toast.LENGTH_SHORT).show()
             R.id.menu_help -> Toast.makeText(this, "Help",Toast.LENGTH_SHORT).show()
             R.id.menu_rate -> Toast.makeText(this, "Rate",Toast.LENGTH_SHORT).show()
+            R.id.menu_signin -> startActivity(Intent(this, LoginActivity::class.java))
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

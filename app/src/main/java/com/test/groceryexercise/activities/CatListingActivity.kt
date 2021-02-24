@@ -28,6 +28,8 @@ class CatListingActivity : ListingActivity() {
     var mProducts : List<Product>? = null
     override val contentResource: Int
         get() = R.layout.activity_cat_listing
+    override val showBackButton: Boolean
+        get() = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
