@@ -32,7 +32,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
     }
 
     fun addToCart(product: Product, amount:Int = 1){
-        if(amount>0){
+        if(amount>=0){
             val content = ContentValues()
             content.put(cart_product_id, product._id)
             content.put(cart_product_amount,amount)
@@ -45,7 +45,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
     }
 
     fun addToCart(product:CartItem){
-        if(product.amount>0){
+        if(product.amount>=0){
             val content = ContentValues()
             content.put(cart_product_id, product._id)
             content.put(cart_product_amount,product.amount)
