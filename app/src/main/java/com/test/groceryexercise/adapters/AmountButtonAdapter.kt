@@ -1,20 +1,14 @@
 package com.test.groceryexercise.adapters
 
 import android.content.Context
-import android.renderscript.ScriptGroup
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.viewbinding.ViewBinding
 import com.test.groceryexercise.app.DBHelper
-import com.test.groceryexercise.databinding.FragmentAddButtonBinding
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
-import com.test.groceryexercise.databinding.RowCartProductBinding
-import com.test.groceryexercise.fragments.AddButtonFragment
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.Product
-import kotlinx.android.synthetic.main.fragment_add_button.view.*
 import kotlinx.android.synthetic.main.plus_minus_button.view.*
 
 class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Boolean=false) {

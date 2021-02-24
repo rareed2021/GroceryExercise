@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="header_bg">#754242</color>
     <color name="item_bg">#FF303030</color>
-    <color name="header">#2A52A1</color>
+    <color name="header">#091937</color>
+    <color name="header_text">#989898</color>
     <color name="error_text">#932222</color>
     <color name="divider">#CECDCD</color>
     <color name="icon">#8E8D8D</color>

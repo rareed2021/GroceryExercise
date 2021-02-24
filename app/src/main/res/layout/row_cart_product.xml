@@ -37,6 +37,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@id/image_product" />
+    <TextView
+        android:id="@+id/text_savings"
+        style="@style/cart_savings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/text_price" />
 
     <ImageView
         android:id="@+id/button_delete"

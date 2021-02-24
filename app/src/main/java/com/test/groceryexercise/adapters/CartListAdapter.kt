@@ -37,10 +37,13 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
             }
             if(product.mrp != product.price){
                 itemView.text_mrp.visibility=View.VISIBLE
+                itemView.text_savings.text = "You saved \$${product.mrp - product.price}!"
+                itemView.text_savings.visibility=View.VISIBLE
                 itemView.text_mrp.text = "\$${product.mrp}"
                 itemView.text_mrp.paintFlags = itemView.text_mrp.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }else{
                 itemView.text_mrp.visibility =View.GONE
+                itemView.text_savings.visibility = View.GONE
             }
             Picasso.get()
                 .load(Config.IMAGE_BASE + product.image)

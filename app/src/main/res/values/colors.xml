@@ -10,6 +10,7 @@
     <color name="header_bg">#FFFFFFFF</color>
     <color name="item_bg">#FFDDDDDD</color>
     <color name="header">#024FE8</color>
+    <color name="header_text">#EEE</color>
     <color name="error_text">#F10000</color>
     <color name="divider">#201F1F</color>
     <color name="icon">#191919</color>
