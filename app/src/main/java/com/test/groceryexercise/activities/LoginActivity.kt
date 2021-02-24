@@ -58,9 +58,6 @@ class LoginActivity : AppCompatActivity() {
                 if(user!=null){
                     val session = SessionManager(this)
                     session.user = user
-                    //val intent = Intent(this, MainActivity::class.java)
-//                    intent.putExtra(User.KEY, user)
-                    //startActivity(intent)
                     finish()
                 }
             },

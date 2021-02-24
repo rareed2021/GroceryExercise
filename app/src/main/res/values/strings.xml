@@ -35,4 +35,12 @@
     <string name="minus_button">-</string>
     <string name="plus_button">+</string>
     <string name="default_amount">0</string>
+    <string name="add_new_address">Add New Address</string>
+    <string name="house_number">House Number</string>
+    <string name="street_name_hint">Street Name</string>
+    <string name="city_hint">City</string>
+    <string name="pin_number_hint">PIN Code</string>
+    <string name="add_address">Add Address</string>
+    <string name="fill_in_all">Please fill in all fields</string>
+    <string name="address_type_hint">Type</string>
 </resources>

@@ -2,6 +2,7 @@ package com.test.groceryexercise.app
 
 class Endpoints {
     companion object{
+        private const val URL_ADDRESS = "address"
         private const val URL_CATEGORY = "category"
         private const val URL_SUBCATEGORY = "subcategory"
         private const val URL_PRODUCTS = "products"
@@ -15,8 +16,12 @@ class Endpoints {
         const val register = "${Config.API_BASE}/${URL_REGISTER}"
         const val login = "${Config.API_BASE}/${URL_LOGIN}"
 
+        const val addressPost = "${Config.API_BASE}/${ URL_ADDRESS}/"
+
+
         fun subcategoriesByCategory(catId:Int):String = "${Config.API_BASE}/${URL_SUBCATEGORY}/${catId}"
         fun productsBySub(subId:Int):String = "${Config.API_BASE}/${URL_PRODUCTS}/${URL_PRODUCT_SUB}/${subId}"
+        fun addressesById(userId:String):String = "${Config.API_BASE}/${URL_ADDRESS}/$userId"
 
 
 

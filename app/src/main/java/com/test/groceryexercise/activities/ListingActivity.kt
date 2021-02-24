@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView
 import com.test.groceryexercise.R
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.app.SessionManager
+import com.test.groceryexercise.models.User
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.menu_cart_layout.view.*
 import kotlinx.android.synthetic.main.nav_drawer.*
@@ -115,6 +116,8 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         if (showBackButton)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val sessionManager = SessionManager(this)
@@ -166,7 +169,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         when(item.itemId){
             R.id.menu_order -> Toast.makeText(this, "Orders",Toast.LENGTH_SHORT).show()
             R.id.menu_account -> Toast.makeText(this, "Account",Toast.LENGTH_SHORT).show()
-            R.id.menu_address -> Toast.makeText(this, "Address",Toast.LENGTH_SHORT).show()
+            R.id.menu_address -> startActivity(Intent(this, AddressListActivity::class.java))
             R.id.menu_refer -> Toast.makeText(this, "Refer",Toast.LENGTH_SHORT).show()
             R.id.menu_help -> Toast.makeText(this, "Help",Toast.LENGTH_SHORT).show()
             R.id.menu_rate -> Toast.makeText(this, "Rate",Toast.LENGTH_SHORT).show()
