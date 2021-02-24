@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.squareup.picasso.Picasso
 import com.test.groceryexercise.R
+import com.test.groceryexercise.adapters.AmountButtonAdapter
 import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.app.SessionManager
@@ -43,8 +44,13 @@ class ProductDetailActivity : ListingActivity() {
             .load(Config.IMAGE_BASE+mProduct.image)
             .into(image_product)
         Log.d("myApp","About to add fragment $mProduct")
-        supportFragmentManager.beginTransaction()
+        val adapter = AmountButtonAdapter(this, mProduct)
+        adapter.setOnAmountChangedListener {
+            updateCartCount()
+        }
+        adapter.init(fragment_add)
+        /*supportFragmentManager.beginTransaction()
             .add(R.id.fragment_add, AddButtonFragment.newInstance(mProduct,false))
-            .commit()
+            .commit()*/
     }
 }

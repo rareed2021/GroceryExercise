@@ -9,10 +9,11 @@ import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.models.CheckoutTotal
 import kotlinx.android.synthetic.main.activity_show_cart.*
 
-class ShowCartActivity : AppCompatActivity(), CartListAdapter.OnUpdateTotals {
+class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
+    override val contentResource: Int
+        get() = R.layout.activity_show_cart
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_cart)
         init()
     }
 

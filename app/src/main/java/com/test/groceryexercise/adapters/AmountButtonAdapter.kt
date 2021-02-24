@@ -36,6 +36,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
             addToCartIfNot()
             Log.d("myApp", "Adding to cart.  Product:$mProduct")
             setupVisible()
+            handler?.invoke(1)
         }
     }
 
@@ -79,12 +80,16 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
             Log.d("myApp","Item is $mItem")
             if (item != null) {
                 val check = db.getCartItem(id)
+                Log.d("myApp", "Doing check $check")
                 if(check==null){
                     db.addToCart(item)
+                    val check2 = db.getCartItem(id)
+                    Log.d("myApp", "Doing check again $check2")
                 }
                 plusItem(item)
             } else {
                 val i = db.getCartItem(id)
+                Log.d("myApp", "getting cart item $i")
                 if (i != null) {
                     mItem = i
                     plusItem(i)
