@@ -12,6 +12,7 @@ import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.app.SessionManager
 import com.test.groceryexercise.fragments.AddButtonFragment
+import com.test.groceryexercise.models.AmountButtonSettings
 import com.test.groceryexercise.models.Product
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.activity_product_detail.text_price
@@ -44,7 +45,7 @@ class ProductDetailActivity : ListingActivity() {
             .load(Config.IMAGE_BASE+mProduct.image)
             .into(image_product)
         Log.d("myApp","About to add fragment $mProduct")
-        val adapter = AmountButtonAdapter(this, mProduct)
+        val adapter = AmountButtonAdapter(this, mProduct, AmountButtonSettings(verboseAmount = true))
         adapter.setOnAmountChangedListener {
             updateCartCount()
         }

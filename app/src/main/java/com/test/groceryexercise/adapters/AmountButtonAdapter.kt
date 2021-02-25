@@ -1,5 +1,6 @@
 package com.test.groceryexercise.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.View
@@ -7,23 +8,24 @@ import android.widget.Button
 import android.widget.TextView
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
+import com.test.groceryexercise.models.AmountButtonSettings
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.Product
 import kotlinx.android.synthetic.main.plus_minus_button.view.*
 
-class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Boolean=false) {
+class AmountButtonAdapter(val context: Context, val itemId:String, val settings :AmountButtonSettings = AmountButtonSettings()) {
     var mProduct : Product? =null
     var mItem :CartItem? = null
     var initialItem :CartItem? = null
     var db :DBHelper = DBHelper(context)
-    var showFull = alwaysShow
+    var showFull = settings.alwaysShow
     var mBinding : PlusMinusButtonBinding?=null
     var mView :View? = null
     private var handler : ((Int)->Unit)? = null
-    constructor(context:Context, product: Product) : this(context, product._id){
+    constructor(context:Context, product: Product, settings: AmountButtonSettings = AmountButtonSettings()) : this(context, product._id, settings){
         mProduct = product
     }
-    constructor(context:Context, item:CartItem,alwaysShow:Boolean=true) : this(context, item._id,alwaysShow){
+    constructor(context:Context, item:CartItem,settings: AmountButtonSettings = AmountButtonSettings()) : this(context, item._id,settings){
         mItem=item
         initialItem =item
     }
@@ -150,7 +152,13 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         if(showFull){
             layout.visibility=View.VISIBLE
             button.visibility=View.GONE
-            amount.text=(mItem?.quantity?:0).toString()
+            val view = mView ?: mBinding?.root
+            Log.d("myApp","Verbose: ${settings.verboseAmount}")
+            amount.text =(mItem?.quantity?:0).toString() +  if(settings.verboseAmount){
+                " in cart"
+            }else{
+                ""
+            }
         }else{
             button.visibility=View.VISIBLE
             layout.visibility=View.GONE

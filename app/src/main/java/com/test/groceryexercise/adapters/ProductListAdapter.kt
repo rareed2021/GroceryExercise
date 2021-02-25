@@ -16,6 +16,7 @@ import com.test.groceryexercise.activities.ListingActivity
 import com.test.groceryexercise.activities.ProductDetailActivity
 import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.Endpoints
+import com.test.groceryexercise.models.AmountButtonSettings
 import com.test.groceryexercise.models.Product
 import com.test.groceryexercise.models.ProductResponse
 import kotlinx.android.synthetic.main.row_product.view.*
@@ -62,7 +63,7 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
                 intent.putExtra(Product.KEY, product)
                 context.startActivity(intent)
             }
-            val adapter = AmountButtonAdapter(context, product)
+            val adapter = AmountButtonAdapter(context, product, AmountButtonSettings())
             adapter.init(itemView.frame_button)
             adapter.setOnAmountChangedListener {
                 if(context is ListingActivity){

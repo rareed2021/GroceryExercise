@@ -15,6 +15,7 @@ import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
 import com.test.groceryexercise.databinding.RowCartProductBinding
+import com.test.groceryexercise.models.AmountButtonSettings
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
 import com.test.groceryexercise.models.Product
@@ -55,7 +56,7 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
             itemView.text_product_name.text = product.productName
             //itemView.text_amount.text = product.quantity.toString()
             val binding = PlusMinusButtonBinding.bind(itemView.change_amount)
-            val amountButtonAdapter = AmountButtonAdapter(context, product, true)
+            val amountButtonAdapter = AmountButtonAdapter(context, product, AmountButtonSettings(alwaysShow = true))
             amountButtonAdapter.init(itemView.change_amount)
             amountButtonAdapter.setOnAmountChangedListener {
                 mData[adapterPosition].quantity=it

@@ -10,9 +10,11 @@ import com.test.groceryexercise.R
 import com.test.groceryexercise.adapters.AmountButtonAdapter
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
+import com.test.groceryexercise.models.AmountButtonSettings
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.Product
 import kotlinx.android.synthetic.main.fragment_add_button.view.*
+import org.json.JSONObject
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ITEM_ID_PARAM = "ITEM_ID"
@@ -60,7 +62,7 @@ class AddButtonFragment : Fragment() {
             }else{
                 val id = mId
                 if(id!=null){
-                    adapter = AmountButtonAdapter(context, id,  showFull)
+                    adapter = AmountButtonAdapter(context, id,  AmountButtonSettings(alwaysShow= showFull))
                 }
             }
             Log.d("myApp","View items ${view.button_items}")
