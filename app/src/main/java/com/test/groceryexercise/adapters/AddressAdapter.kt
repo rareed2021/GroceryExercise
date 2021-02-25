@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.test.groceryexercise.R
+import com.test.groceryexercise.activities.SelectPaymentActivity
 import com.test.groceryexercise.app.Endpoints
 import com.test.groceryexercise.app.SessionManager
 import com.test.groceryexercise.models.Address
@@ -56,6 +57,11 @@ class AddressAdapter(private val context: Context, private val checkoutOnClick:B
             itemView.text_pin.text =address.pincode.toString()
             itemView.text_house_number.text = address.houseNo
             if(checkoutOnClick){
+                itemView.setOnClickListener {
+                    val intent = Intent(context, SelectPaymentActivity::class.java)
+                    intent.putExtra(Address.KEY, address)
+                    context.startActivity(intent)
+                }
             }
         }
 

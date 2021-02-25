@@ -1,17 +1,21 @@
 package com.test.groceryexercise.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
 import com.test.groceryexercise.adapters.CartListAdapter
 import com.test.groceryexercise.app.DBHelper
+import com.test.groceryexercise.models.Address
 import com.test.groceryexercise.models.CheckoutTotal
 import kotlinx.android.synthetic.main.activity_show_cart.*
 
 class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
     override val contentResource: Int
         get() = R.layout.activity_show_cart
+    override val showBackButton: Boolean
+        get() = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -22,6 +26,11 @@ class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
         val items = db.cartItems
         recycler_cart_items.adapter = CartListAdapter(this,items)
         recycler_cart_items.layoutManager = LinearLayoutManager(this)
+        button_checkout.setOnClickListener {
+            val intent = Intent(this, AddressListActivity::class.java)
+            intent.putExtra(Address.CHECKOUT_KEY, true)
+            startActivity(intent)
+        }
     }
 
     override fun updateTotals(totals: CheckoutTotal) {

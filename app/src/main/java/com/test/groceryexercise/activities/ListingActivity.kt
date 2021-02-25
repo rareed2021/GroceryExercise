@@ -46,12 +46,12 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         cartTextView?.visibility = if(_currentCartCount>0)View.VISIBLE else View.GONE
     }
 
-    abstract val contentResource : Int
+
     open val showBackButton:Boolean = false
     open val showCartButton:Boolean = true
+    abstract val contentResource : Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //val content :View = findViewById(R.id.content)
         setContentView(R.layout.nav_drawer)
         val content = LayoutInflater.from(this).inflate(contentResource,drawer_layout,false)
         val bar = LayoutInflater.from(this).inflate(R.layout.app_bar, drawer_layout, false)

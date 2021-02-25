@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryExercise">
-        <activity android:name=".activities.AddAddressActivity"></activity>
+        <activity android:name=".activities.SelectPaymentActivity"></activity>
+        <activity android:name=".activities.AddAddressActivity" />
         <activity android:name=".activities.AddressListActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>

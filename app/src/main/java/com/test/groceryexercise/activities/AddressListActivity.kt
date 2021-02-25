@@ -3,6 +3,7 @@ package com.test.groceryexercise.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
 import com.test.groceryexercise.adapters.AddressAdapter
@@ -20,6 +21,9 @@ class AddressListActivity : AppCompatActivity() {
 
     private fun init() {
         toCheckout = intent.getBooleanExtra(Address.CHECKOUT_KEY,false)
+        if(toCheckout){
+            text_select_address.visibility= View.VISIBLE
+        }
         adapter = AddressAdapter(this,toCheckout)
         recycler_addresses.adapter = adapter
         recycler_addresses.layoutManager = LinearLayoutManager(this)

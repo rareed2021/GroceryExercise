@@ -78,7 +78,7 @@ class AddButtonFragment : Fragment() {
         }
     }
     private fun plusItem(item:CartItem){
-        item.amount+=1
+        item.quantity+=1
         db?.updateItemAmount(item)
     }
     private fun setupVisible(view:View){
@@ -86,13 +86,13 @@ class AddButtonFragment : Fragment() {
         if(id!=null) {
             mItem = db?.getCartItem(id)
         }
-        if((mItem?.amount?:0)>0){
+        if((mItem?.quantity?:0)>0){
             showFull=true
         }
         if(showFull){
             view.layout_full.visibility=View.VISIBLE
             view.button_add.visibility=View.GONE
-            view.text_amount.text=(mItem?.amount?:0).toString()
+            view.text_amount.text=(mItem?.quantity?:0).toString()
         }else{
             view.button_add.visibility=View.VISIBLE
             view.layout_full.visibility=View.GONE

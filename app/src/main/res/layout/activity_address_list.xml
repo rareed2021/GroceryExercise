@@ -3,6 +3,16 @@
     android:orientation="vertical"
     android:padding="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="@string/select_address"
+        android:visibility="gone"
+        android:id="@+id/text_select_address"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

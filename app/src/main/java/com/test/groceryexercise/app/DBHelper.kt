@@ -5,7 +5,9 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.test.groceryexercise.models.CartItem
+import com.test.groceryexercise.models.CheckoutTotal
 import com.test.groceryexercise.models.Product
 
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1) {
@@ -17,8 +19,10 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
         const val cart_product_name = "name"
         const val cart_product_mrp = "mrp"
         const val cart_product_price = "price"
-        const val cart_product_amount = "amount"
+        const val cart_product_amount = "quantity"
         const val cart_product_image = "image"
+        const val column_total = "total"
+        const val column_subtotal = "subtotal"
         val cart_columns = arrayOf(cart_product_id, cart_product_name, cart_product_image, cart_product_price, cart_product_amount, cart_product_mrp)
     }
 
@@ -45,10 +49,10 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
     }
 
     fun addToCart(product:CartItem){
-        if(product.amount>=0){
+        if(product.quantity>=0){
             val content = ContentValues()
             content.put(cart_product_id, product._id)
-            content.put(cart_product_amount,product.amount)
+            content.put(cart_product_amount,product.quantity)
             content.put(cart_product_mrp, product.mrp)
             content.put(cart_product_price,product.price)
             content.put(cart_product_name,product.productName)
@@ -73,7 +77,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
     fun updateItemAmount(item:CartItem){
         val  whereArgs= arrayOf(item._id)
         val content = ContentValues()
-        content.put(cart_product_amount,item.amount)
+        content.put(cart_product_amount,item.quantity)
         writableDatabase.update(TABLE_CART,content, "$cart_product_id = ?", whereArgs)
     }
 
@@ -85,6 +89,21 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
         cursor.getString(cursor.getColumnIndex(cart_product_name)),
         cursor.getInt(cursor.getColumnIndex(cart_product_amount)),
     )
+
+    val cartCost : CheckoutTotal
+        get(){
+            val columns = arrayOf("sum($cart_product_price * $cart_product_amount) as $column_total",
+                "sum($cart_product_mrp * $cart_product_amount) as $column_subtotal"
+            )
+            val cursor = readableDatabase.query(TABLE_CART, columns, null, null, null, null,null)
+            val ret = CheckoutTotal()
+            if(cursor.moveToFirst()){
+                ret.total = cursor.getDouble(cursor.getColumnIndex(column_total))
+                ret.subtotal = cursor.getDouble(cursor.getColumnIndex(column_subtotal))
+                ret.discount = ret.subtotal-ret.total
+            }
+            return ret
+        }
 
     val cartSize : Int
         get(){

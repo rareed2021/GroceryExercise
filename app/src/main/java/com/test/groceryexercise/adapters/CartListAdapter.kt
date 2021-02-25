@@ -10,7 +10,6 @@ import com.squareup.picasso.Picasso
 import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
-import com.test.groceryexercise.databinding.RowCartProductBinding
 import com.test.groceryexercise.databinding.RowCartProductConstraintBinding
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
@@ -28,12 +27,12 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
         fun bind(product: CartItem) {
             itemView.text_price.text = "\$${product.price}"
             itemView.text_product_name.text = product.productName
-            //itemView.text_amount.text = product.amount.toString()
+            //itemView.text_amount.text = product.quantity.toString()
             val binding = PlusMinusButtonBinding.bind(itemView.change_amount)
             val amountButtonAdapter = AmountButtonAdapter(context, product, true)
             amountButtonAdapter.init(itemView.change_amount)
             amountButtonAdapter.setOnAmountChangedListener {
-                mData[adapterPosition].amount=it
+                mData[adapterPosition].quantity=it
                 update()
             }
             if(product.mrp != product.price){
@@ -67,12 +66,13 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
 
     val totalCost:CheckoutTotal
         get(){
-            val total = CheckoutTotal()
+            val total = DBHelper(context).cartCost
+            /*val total = CheckoutTotal()
             for(item in mData){
-                total.subtotal+= item.mrp * item.amount
-                total.total += item.price * item.amount
+                total.subtotal+= item.mrp * item.quantity
+                total.total += item.price * item.quantity
             }
-            total.discount = total.subtotal - total.total
+            total.discount = total.subtotal - total.total*/
             return total
         }
 

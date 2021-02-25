@@ -102,7 +102,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
                 }
             }
             setupVisible()
-            handler?.invoke(mItem?.amount ?: 0)
+            handler?.invoke(mItem?.quantity ?: 0)
         }
     }
 
@@ -110,9 +110,9 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         buttonMinus.setOnClickListener {
             val item = mItem
             if (item != null) {
-                if (item.amount > 0) {
-                    item.amount -= 1
-                    if (item.amount > 0) {
+                if (item.quantity > 0) {
+                    item.quantity -= 1
+                    if (item.quantity > 0) {
                         db.updateItemAmount(item)
                     } else {
                         db.removeFromCart(item._id)
@@ -120,7 +120,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
                 }
             }
             setupVisible()
-            handler?.invoke(mItem?.amount ?: 0)
+            handler?.invoke(mItem?.quantity ?: 0)
         }
     }
 
@@ -134,7 +134,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         }
     }
     private fun plusItem(item:CartItem){
-        item.amount+=1
+        item.quantity+=1
         db.updateItemAmount(item)
     }
 
@@ -144,20 +144,20 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
         if(item!=null){
             mItem = item
         }
-        if((mItem?.amount?:0)>0){
+        if((mItem?.quantity?:0)>0){
             showFull=true
         }
         if(showFull){
             layout.visibility=View.VISIBLE
             button.visibility=View.GONE
-            amount.text=(mItem?.amount?:0).toString()
+            amount.text=(mItem?.quantity?:0).toString()
         }else{
             button.visibility=View.VISIBLE
             layout.visibility=View.GONE
         }
     }
     private fun setupVisible(){
-        Log.d("myApp","Setting up ${mItem?.amount}")
+        Log.d("myApp","Setting up ${mItem?.quantity}")
         val bind = mBinding
         val view=mView
         if(bind !=null){

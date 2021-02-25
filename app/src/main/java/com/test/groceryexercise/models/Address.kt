@@ -14,6 +14,7 @@ data class Address(
 ):Serializable{
     companion object{
         const val CHECKOUT_KEY = "checkout_after"
+        const val KEY = "ADDRESS"
     }
 }
 
