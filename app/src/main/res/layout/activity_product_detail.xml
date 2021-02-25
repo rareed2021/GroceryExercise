@@ -14,21 +14,29 @@
             android:id="@+id/image_product"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:scaleType="fitXY"
             android:layout_weight="1" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/text_product_name"
                 style="@style/detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
             <TextView
                 android:id="@+id/text_product_description"
                 style="@style/detail_description"
@@ -36,14 +44,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_product_name"
                 android:scrollbars="vertical" />
+            </ScrollView>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:id="@+id/fragment_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true">
-                <include layout="@layout/plus_minus_button"/>
+                android:layout_alignParentEnd="true">
+
+                <include layout="@layout/plus_minus_button" />
             </FrameLayout>
 
             <TextView
@@ -52,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true" />
+                android:text="@string/price_default" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

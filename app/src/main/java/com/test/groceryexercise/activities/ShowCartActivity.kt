@@ -2,6 +2,7 @@ package com.test.groceryexercise.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
 import com.test.groceryexercise.adapters.CartListAdapter
@@ -25,6 +26,7 @@ class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
     private fun init() {
         val db = DBHelper(this)
         val items = db.cartItems
+        CartListAdapter(this,items).init(recycler_cart_items)
         recycler_cart_items.adapter = CartListAdapter(this,items)
         recycler_cart_items.layoutManager = LinearLayoutManager(this)
         button_checkout.setOnClickListener {

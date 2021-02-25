@@ -31,8 +31,6 @@ class CatListingActivity : ListingActivity() {
     override val showBackButton: Boolean
         get() = true
 
-    override val showCartButton: Boolean
-        get() = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,113 +1,126 @@
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_cart_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_cart_items"
                 android:layout_alignParentTop="true"
-                android:background="@color/item_bg"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_subtotal"
-                android:text="@string/price_default"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/recycler_cart_items"
-                style="@style/cart_text_value"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_subtotal"
-                android:layout_toStartOf="@+id/text_subtotal"
-                android:layout_alignBottom="@id/text_subtotal"
-                android:text="@string/label_subtotal"
-                style="@style/cart_label"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_discount"
-                android:text="@string/price_default"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/text_subtotal"
-                style="@style/cart_text_value"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_discount"
-                android:layout_toStartOf="@+id/text_discount"
-                android:layout_alignBottom="@id/text_discount"
-                android:text="@string/label_discount"
-                style="@style/cart_label"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_delivery"
-                android:text="@string/price_default"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/text_discount"
-                style="@style/cart_text_value"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_delivery"
-                android:layout_toStartOf="@+id/text_delivery"
-                android:layout_alignBottom="@id/text_delivery"
-                android:text="@string/delivery_charge"
-                style="@style/cart_label"
-                />
-            <FrameLayout
-                android:layout_width="140dp"
-                android:layout_height="2dp"
-                android:background="@color/divider"
-                android:layout_below="@id/text_delivery"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:id="@+id/divider"
-                />
+                android:background="@color/item_bg" />
 
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_total"
-                android:text="@string/price_default"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/divider"
-                style="@style/cart_text_value"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_total"
-                android:layout_toStartOf="@+id/text_total"
-                android:layout_alignBottom="@id/text_total"
-                android:text="@string/label_total"
-                style="@style/cart_label"
-                />
+                android:layout_below="@id/recycler_cart_items"
+                android:layout_margin="12dp"
+                app:cardElevation="8dp"
+                android:padding="20dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text_subtotal"
+                        style="@style/cart_text_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/price_default" />
+
+                    <TextView
+                        android:id="@+id/label_subtotal"
+                        style="@style/cart_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/text_subtotal"
+                        android:layout_toStartOf="@+id/text_subtotal"
+                        android:text="@string/label_subtotal" />
+
+                    <TextView
+                        android:id="@+id/text_discount"
+                        style="@style/cart_text_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_subtotal"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/price_default" />
+
+                    <TextView
+                        android:id="@+id/label_discount"
+                        style="@style/cart_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/text_discount"
+                        android:layout_toStartOf="@+id/text_discount"
+                        android:text="@string/label_discount" />
+
+                    <TextView
+                        android:id="@+id/text_delivery"
+                        style="@style/cart_text_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_discount"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/price_default" />
+
+                    <TextView
+                        android:id="@+id/label_delivery"
+                        style="@style/cart_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/text_delivery"
+                        android:layout_toStartOf="@+id/text_delivery"
+                        android:text="@string/delivery_charge" />
+
+                    <FrameLayout
+                        android:id="@+id/divider"
+                        android:layout_width="140dp"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/text_delivery"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/divider" />
+
+                    <TextView
+                        android:id="@+id/text_total"
+                        style="@style/cart_text_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/price_default" />
+
+                    <TextView
+                        android:id="@+id/label_total"
+                        style="@style/cart_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/text_total"
+                        android:layout_toStartOf="@+id/text_total"
+                        android:text="@string/label_total" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
     </ScrollView>
+
     <Button
+        android:id="@+id/button_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/check_out"
-        android:id="@+id/button_checkout"
-        />
+        android:text="@string/check_out" />
 </LinearLayout>

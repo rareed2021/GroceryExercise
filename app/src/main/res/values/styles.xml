@@ -45,6 +45,7 @@
     </style>
 
     <style name="cart_text">
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="cart_label" parent="cart_text">
         <item name="android:layout_marginEnd">4dp</item>
@@ -53,7 +54,9 @@
 
     <style name="cart_text_value" parent="cart_text">
         <item name="android:titleMarginEnd">12dp</item>
-        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:titleMarginTop">0dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="cart_price_text">

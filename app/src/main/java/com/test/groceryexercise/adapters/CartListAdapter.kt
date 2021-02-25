@@ -1,10 +1,14 @@
 package com.test.groceryexercise.adapters
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.test.groceryexercise.app.Config
@@ -13,17 +17,39 @@ import com.test.groceryexercise.databinding.PlusMinusButtonBinding
 import com.test.groceryexercise.databinding.RowCartProductConstraintBinding
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
+import com.test.groceryexercise.models.Product
+import com.test.groceryexercise.util.SwipeToDeleteCallback
+import kotlinx.android.synthetic.main.activity_show_cart.*
 import kotlinx.android.synthetic.main.row_cart_product.view.*
 import kotlinx.android.synthetic.main.row_cart_product.view.text_price
 
 class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : RecyclerView.Adapter<CartListAdapter.ViewHolder>(){
     private val mData  = data.toMutableList()
     lateinit var binding :RowCartProductConstraintBinding
+    lateinit var mHelper :ItemTouchHelper
     init{
         if(context is OnUpdateTotals)
             context.updateTotals(totalCost)
     }
+    inner class DeleteCallback(view:RecyclerView) : SwipeToDeleteCallback(context,view){
+        override val title = "Remove From Cart?"
+        override val message = "Are you sure you want to remove this from your cart?"
+        override fun doDelete(viewHolder: RecyclerView.ViewHolder) {
+            if(viewHolder is ViewHolder){
+                viewHolder.deleteItem()
+            }
+        }
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        fun deleteItem(){
+            val db = DBHelper(context)
+            val product = mData[adapterPosition]
+            db.removeFromCart(product._id)
+            mData.removeAt(adapterPosition)
+            notifyItemRemoved(adapterPosition)
+            update()
+        }
         fun bind(product: CartItem) {
             itemView.text_price.text = "\$${product.price}"
             itemView.text_product_name.text = product.productName
@@ -49,13 +75,9 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
                 .load(Config.IMAGE_BASE + product.image)
                 .resize(80,80)
                 .into(itemView.image_product)
-            itemView.button_delete.setOnClickListener {
-                val db = DBHelper(context)
-                db.removeFromCart(product._id)
-                mData.removeAt(adapterPosition)
-                notifyItemRemoved(adapterPosition)
-                update()
-            }
+            /*itemView.button_delete.setOnClickListener {
+                deleteItem()
+            }*/
         }
     }
 
@@ -88,6 +110,16 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
     }
 
     override fun getItemCount(): Int =mData.size
+
+
+    fun init(view: RecyclerView) {
+        view.adapter = this
+        view.layoutManager = LinearLayoutManager(context)
+        val cb = DeleteCallback(view)
+        mHelper = ItemTouchHelper(cb)
+        cb.mHelper=mHelper
+        mHelper.attachToRecyclerView(view)
+    }
 
     interface OnUpdateTotals{
         fun updateTotals(totals: CheckoutTotal)
