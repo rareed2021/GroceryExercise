@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -17,6 +19,7 @@ import com.test.groceryexercise.app.Endpoints
 import com.test.groceryexercise.app.SessionManager
 import com.test.groceryexercise.models.Address
 import com.test.groceryexercise.models.AddressResponse
+import com.test.groceryexercise.util.SwipeToDeleteCallback
 import kotlinx.android.synthetic.main.row_address.view.*
 
 class AddressAdapter(private val context: Context, private val checkoutOnClick:Boolean)  :RecyclerView.Adapter<AddressAdapter.ViewHolder>(){
@@ -48,8 +51,14 @@ class AddressAdapter(private val context: Context, private val checkoutOnClick:B
         }else{
             mData.clear()
         }
-
     }
+
+    inner class Callback(context:Context) : SwipeToDeleteCallback(context){
+        override fun doDelete(viewHolder: RecyclerView.ViewHolder) {
+            (viewHolder as? ViewHolder)?.deleteAddress()
+        }
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(address: Address) {
             itemView.text_streetname.text=address.streetName
@@ -64,7 +73,21 @@ class AddressAdapter(private val context: Context, private val checkoutOnClick:B
                 }
             }
         }
-
+        fun deleteAddress(){
+            val queue = Volley.newRequestQueue(context)
+            val request = StringRequest(
+                Request.Method.DELETE,
+                Endpoints.addressesById(mData[adapterPosition]._id?:""),
+                {
+                    mData.removeAt(adapterPosition)
+                    notifyItemRemoved(adapterPosition)
+                },
+                {
+                    Log.e("myApp",String(it.networkResponse.data))
+                }
+            )
+            queue.add(request)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -78,5 +101,14 @@ class AddressAdapter(private val context: Context, private val checkoutOnClick:B
 
     override fun getItemCount(): Int {
         return mData.size
+    }
+
+    fun init(view:RecyclerView){
+        view.adapter = this
+        view.layoutManager = LinearLayoutManager(context)
+        val cb = Callback(context)
+        val helper = ItemTouchHelper(cb)
+        cb.mHelper=helper
+        helper.attachToRecyclerView(view)
     }
 }

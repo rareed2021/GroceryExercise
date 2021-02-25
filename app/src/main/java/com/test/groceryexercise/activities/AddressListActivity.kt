@@ -30,8 +30,7 @@ class AddressListActivity : ListingActivity() {
             text_select_address.visibility= View.VISIBLE
         }
         adapter = AddressAdapter(this,toCheckout)
-        recycler_addresses.adapter = adapter
-        recycler_addresses.layoutManager = LinearLayoutManager(this)
+        adapter.init(recycler_addresses)
         button_add_address.setOnClickListener {
             startActivity(Intent(this,AddAddressActivity::class.java))
         }

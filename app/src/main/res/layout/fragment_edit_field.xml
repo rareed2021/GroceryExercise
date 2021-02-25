@@ -1,6 +1,11 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="0dp"
+    android:layout_marginBottom="6dp"
+    android:background="@color/background"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +34,8 @@
         android:layout_marginRight="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="0dp"
         android:layout_below="@id/text_content"
         android:background="@color/foreground"
         />

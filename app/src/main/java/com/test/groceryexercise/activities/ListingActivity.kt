@@ -96,6 +96,10 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
     }
 
 
+    fun updateHeader(){
+        setHeaderUI()
+    }
+
 
     private fun setHeaderUI(){
         val header = navigationView.getHeaderView(0)

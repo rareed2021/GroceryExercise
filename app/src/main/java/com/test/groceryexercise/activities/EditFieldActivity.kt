@@ -42,8 +42,8 @@ class EditFieldActivity : AppCompatActivity() {
                 text_error.visibility=View.VISIBLE
             }else{
                 if(obj is User) {
-                    SessionManager(this).user = obj.setField(mField, field_value)
-                    ApiHelper(this).updateUser()
+                    //SessionManager(this).user = obj.setField(mField, field_value)
+                    ApiHelper(this).updateUser(obj.setField(mField,field_value))
                 }
                 finish()
             }

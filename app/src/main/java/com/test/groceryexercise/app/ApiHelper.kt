@@ -7,22 +7,38 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import com.test.groceryexercise.activities.ListingActivity
 import com.test.groceryexercise.models.AddressResponse
 import com.test.groceryexercise.models.User
 import org.json.JSONObject
 
 class ApiHelper(private val context: Context) {
-    fun updateUser(){
-        val user = SessionManager(context).user
+    fun updateUser(newuser : User){
+        val session =SessionManager(context)
+        val user = session.user
         if(user!=null){
             val queue = Volley.newRequestQueue(context)
-            val params = JSONObject(Gson().toJson(user, User::class.java))
+            val params = JSONObject()
+            if(user.email!=newuser.email){
+                params.put("email",newuser.email)
+            }
+            if(user.mobile!=newuser.mobile){
+                params.put("mobile",newuser.mobile)
+            }
+            if(user.firstName!=newuser.firstName){
+                params.put("firstName",newuser.firstName)
+            }
+            Log.d("myApp",user._id)
+            Log.d("myApp",Endpoints.putUserById(user._id?:""))
             val request = JsonObjectRequest(
                 Request.Method.PUT,
-                Endpoints.putUserById(user._id),
+                Endpoints.putUserById(user._id?:""),
                 params,
                 {
-                    Log.d("myApp","User Updated")
+                    session.user = newuser
+                    if(context is ListingActivity)
+                        context.updateHeader()
+                    Log.d("myApp",it.toString(2))
                 },
                 {
                     Log.e("myApp",String(it.networkResponse.data))
