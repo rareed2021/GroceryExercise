@@ -16,6 +16,6 @@
     <color name="icon">#8E8D8D</color>
     <color name="icon_light">#D5D5D5</color>
     <color name="background">#111</color>
-    <color name="foreground">#EEE</color>
+    <color name="foreground">#DDD</color>
 
 </resources>

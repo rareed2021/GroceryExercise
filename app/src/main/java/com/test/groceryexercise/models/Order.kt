@@ -1,10 +1,10 @@
 package com.test.groceryexercise.models
 
 data class Order(
-    val orderSummary: OrderSummary,
+    val orderSummary: CheckoutTotal,
     val payment: Payment,
     val products: List<CartItem>,
-    val shippingAddress: ShippingAddress,
+    val shippingAddress: Address,
     val userId: String,
     val __v: Int?=null,
     val _id: String?=null,
@@ -25,7 +25,7 @@ data class OrderSummary(
 data class Payment(
     val paymentMode: String,//cash
     val paymentStatus: String,//completed
-    val _id: String?,
+    val _id: String?=null,
 )
 
 

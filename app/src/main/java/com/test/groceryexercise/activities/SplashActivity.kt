@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.test.groceryexercise.R
 import com.test.groceryexercise.app.Endpoints
+import com.test.groceryexercise.app.SessionManager
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
@@ -38,9 +39,13 @@ class SplashActivity : AppCompatActivity() {
                     Log.d("myApp","Error in response")
                 }
                 val cats = response.data
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra(Category.KEY, cats.toTypedArray())
-                startActivity(intent)
+                val session = SessionManager(this)
+                val mainIntent = Intent(this, MainActivity::class.java)
+                mainIntent.putExtra(Category.KEY, cats.toTypedArray())
+                Log.d("myApp","Have data. Reloading")
+                if(!session.loadActive(mainIntent)){
+                    startActivity(mainIntent)
+                }
             },
             {
                 if(it is TimeoutError){

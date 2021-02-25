@@ -46,7 +46,6 @@ class MainActivity : ListingActivity() {
 
     private fun init(savedInstanceState: Bundle?) {
         val session = SessionManager(this)
-        val leaving = session.loadActive()
         user = session.user
         mQueue = Volley.newRequestQueue(this)
         val maybeBundle = savedInstanceState?.getBundle(LruBitmapCache.KEY)

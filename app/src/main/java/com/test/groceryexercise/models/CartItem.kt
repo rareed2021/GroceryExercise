@@ -7,7 +7,7 @@ data class CartItem(
     val image: String,
     val mrp: Double,
     val price: Double,
-    val productName: String?,
+    val productName: String,
     var quantity:Int,
 ):Serializable{
     companion object{

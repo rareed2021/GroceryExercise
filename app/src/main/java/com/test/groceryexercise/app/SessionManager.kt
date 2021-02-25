@@ -7,6 +7,7 @@ import android.content.Intent
 import android.util.Log
 import com.google.gson.Gson
 import com.test.groceryexercise.activities.CatListingActivity
+import com.test.groceryexercise.activities.MainActivity
 import com.test.groceryexercise.activities.ProductDetailActivity
 import com.test.groceryexercise.models.Product
 import com.test.groceryexercise.models.SubCategory
@@ -59,10 +60,11 @@ class SessionManager(private val context: Context) {
             .putString(KEY_ACTIVE_TYPE,k)
             .apply()
     }
-    fun loadActive():Boolean{
+    fun loadActive(mainIntent:Intent?=null):Boolean{
         val actType = preference.getString(KEY_ACTIVE_TYPE,null)
         val actString = preference.getString(KEY_ACTIVE,null)
         Log.d("myApp","Type: $actType, Data: $actString")
+        val main = mainIntent ?: Intent(context,MainActivity::class.java)
         if(actType!=null && actString!=null){
             val c = when(actType){
                 KEY_PRODUCT -> Product::class.java
@@ -73,13 +75,14 @@ class SessionManager(private val context: Context) {
                 is Product ->{
                     val intent = Intent(context,ProductDetailActivity::class.java)
                     intent.putExtra(Product.KEY, o)
-                    context.startActivity(intent)
+                    Log.d("myApp","Trying to start")
+                    context.startActivities(arrayOf(main,intent))
                     return true
                 }
                 is Category ->{
                     val intent = Intent(context,CatListingActivity::class.java)
                     intent.putExtra(Category.KEY,o)
-                    context.startActivity(intent)
+                    context.startActivities(arrayOf(main,intent))
                     return true
                 }
             }

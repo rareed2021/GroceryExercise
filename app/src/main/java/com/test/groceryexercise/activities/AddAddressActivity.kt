@@ -1,14 +1,11 @@
 package com.test.groceryexercise.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.RenderProcessGoneDetail
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.test.groceryexercise.R
@@ -41,12 +38,12 @@ class AddAddressActivity : AppCompatActivity() {
             if(num != "" && street!="" && city!="" && pin!=null){
                 if(user!=null) {
                     val address = Address(
-                        null,
-                        null,
                         city,
                         num,
                         pin,
                         street,
+                        null,
+                        null,
                         type,
                         user._id
                     )

@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
 import com.test.groceryexercise.models.Product
@@ -19,7 +18,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
         const val cart_product_name = "name"
         const val cart_product_mrp = "mrp"
         const val cart_product_price = "price"
-        const val cart_product_amount = "quantity"
+        const val cart_product_amount = "amount"
         const val cart_product_image = "image"
         const val column_total = "total"
         const val column_subtotal = "subtotal"
@@ -90,6 +89,10 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
         cursor.getInt(cursor.getColumnIndex(cart_product_amount)),
     )
 
+    fun clearCart() {
+        writableDatabase.delete(TABLE_CART,"",arrayOf())
+    }
+
     val cartCost : CheckoutTotal
         get(){
             val columns = arrayOf("sum($cart_product_price * $cart_product_amount) as $column_total",
@@ -98,9 +101,10 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
             val cursor = readableDatabase.query(TABLE_CART, columns, null, null, null, null,null)
             val ret = CheckoutTotal()
             if(cursor.moveToFirst()){
-                ret.total = cursor.getDouble(cursor.getColumnIndex(column_total))
-                ret.subtotal = cursor.getDouble(cursor.getColumnIndex(column_subtotal))
-                ret.discount = ret.subtotal-ret.total
+                ret.totalAmount = cursor.getDouble(cursor.getColumnIndex(column_total))
+                ret.ourPrice=ret.totalAmount
+                ret.orderAmount = cursor.getDouble(cursor.getColumnIndex(column_subtotal))
+                ret.discount = ret.orderAmount -ret.totalAmount
             }
             return ret
         }

@@ -1,7 +1,6 @@
 package com.test.groceryexercise.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
@@ -14,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_show_cart.*
 class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
     override val contentResource: Int
         get() = R.layout.activity_show_cart
+    override val showCartButton: Boolean
+        get() = false
     override val showBackButton: Boolean
         get() = true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class ShowCartActivity : ListingActivity(), CartListAdapter.OnUpdateTotals {
 
     override fun updateTotals(totals: CheckoutTotal) {
         text_discount.text = String.format("%.2f", totals.discount)
-        text_subtotal.text = String.format("%.2f", totals.subtotal)
-        text_total.text = String.format("%.2f", totals.total)
+        text_subtotal.text = String.format("%.2f", totals.orderAmount)
+        text_total.text = String.format("%.2f", totals.totalAmount)
     }
 }

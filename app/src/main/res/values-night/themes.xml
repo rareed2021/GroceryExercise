@@ -12,10 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="materialButtonStyle">@style/ButtonColor</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="ButtonColor" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/foreground</item>
-        <item name="android:colorAccent">#EEE</item>
+        <item name="android:colorAccent">@color/foreground</item>
     </style>
 </resources>
