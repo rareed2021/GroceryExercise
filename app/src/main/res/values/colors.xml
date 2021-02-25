@@ -18,4 +18,5 @@
     <color name="primary_desaturated">#658FE3</color>
     <color name="background">#EEE</color>
     <color name="foreground">#111</color>
+    <color name="light">#FFF</color>
 </resources>

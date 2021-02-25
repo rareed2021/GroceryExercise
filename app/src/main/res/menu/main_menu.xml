@@ -7,8 +7,4 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/menu_logout"
-        app:showAsAction="ifRoom"
-        android:title="@string/menu_logout" />
 </menu>

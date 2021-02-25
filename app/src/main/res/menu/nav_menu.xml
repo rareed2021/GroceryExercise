@@ -4,16 +4,21 @@
 
         <item
             android:id="@+id/menu_signin"
+            android:icon="@drawable/ic_baseline_login_24"
             android:title="Sign In"
             />
         <item
             android:id="@+id/menu_account"
+            android:icon="@drawable/ic_baseline_person_24"
             android:title="My Account" />
         <item
             android:id="@+id/menu_order"
+            android:icon="@drawable/ic_baseline_shopping_cart_24"
+            android:iconTint="@color/icon"
             android:title="My Orders" />
         <item
             android:id="@+id/menu_address"
+            android:icon="@drawable/ic_baseline_house_24"
             android:title="My Address" />
 
     </group>
@@ -30,4 +35,11 @@
         android:id="@+id/menu_refer"
         android:title="Refer and Earn" />
 </group>
+    <group>
+
+        <item
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:id="@+id/menu_logout"
+            android:title="@string/menu_logout" />
+    </group>
 </menu>

@@ -1,5 +1,6 @@
 package com.test.groceryexercise.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -107,8 +109,10 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         val menu = navigationView.menu
         val signin = menu.findItem(R.id.menu_signin)
         val account = menu.findItem(R.id.menu_account)
+        val logout = menu.findItem(R.id.menu_logout)
         signin.isVisible = !loggedIn
         account.isVisible = loggedIn
+        logout.isVisible = loggedIn
     }
 
     open fun setupToolbar(bar:Toolbar){
@@ -134,18 +138,8 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         }else{
             cartItem?.isVisible=false
         }
-        val loggedIn =  user!=null
-        //val welcome = menu?.findItem(R.id.menu_welcome)
-        //welcome?.isVisible = loggedIn
-        val logout = menu?.findItem(R.id.menu_logout)
-        logout?.isVisible = loggedIn
-        //val login = menu?.findItem(R.id.menu_login)
-        //login?.isVisible = !loggedIn
         val cart = menu?.findItem(R.id.menu_cart)
         cart?.title = "(${dbHelper.cartSize})"
-        /*if(user!=null) {
-            welcome?.title = "Welcome ${user.firstName}"
-        }*/
         return true
     }
 
@@ -174,6 +168,25 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
             R.id.menu_help -> Toast.makeText(this, "Help",Toast.LENGTH_SHORT).show()
             R.id.menu_rate -> Toast.makeText(this, "Rate",Toast.LENGTH_SHORT).show()
             R.id.menu_signin -> startActivity(Intent(this, LoginActivity::class.java))
+            R.id.menu_logout -> {
+                val builder = AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("Log Out",object:DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            val session = SessionManager(this@ListingActivity)
+                            session.user=null
+                            this@ListingActivity.invalidateOptionsMenu()
+                            this@ListingActivity.setHeaderUI()
+                        }
+                    })
+                    .setNegativeButton("Stay",object:DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog?.dismiss()
+                        }
+                    })
+                builder.create().show()
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
