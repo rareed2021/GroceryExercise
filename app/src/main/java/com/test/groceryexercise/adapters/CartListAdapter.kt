@@ -31,7 +31,7 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
         if(context is OnUpdateTotals)
             context.updateTotals(totalCost)
     }
-    inner class DeleteCallback(view:RecyclerView) : SwipeToDeleteCallback(context,view){
+    inner class DeleteCallback() : SwipeToDeleteCallback(context){
         override val title = "Remove From Cart?"
         override val message = "Are you sure you want to remove this from your cart?"
         override fun doDelete(viewHolder: RecyclerView.ViewHolder) {
@@ -115,7 +115,7 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
     fun init(view: RecyclerView) {
         view.adapter = this
         view.layoutManager = LinearLayoutManager(context)
-        val cb = DeleteCallback(view)
+        val cb = DeleteCallback()
         mHelper = ItemTouchHelper(cb)
         cb.mHelper=mHelper
         mHelper.attachToRecyclerView(view)

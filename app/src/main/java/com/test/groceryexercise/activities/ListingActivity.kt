@@ -40,7 +40,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
             _currentCartCount=value
             setCartIconText()
         }
-    protected fun updateCartCount(){
+    fun updateCartCount(){
         currentCartCount = dbHelper.cartSize
     }
     private fun setCartIconText() {

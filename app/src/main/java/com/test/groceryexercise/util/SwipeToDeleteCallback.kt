@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SwipeToDeleteCallback(private val context: Context, private val view:RecyclerView) : ItemTouchHelper.Callback() {
+abstract class SwipeToDeleteCallback(private val context: Context) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder

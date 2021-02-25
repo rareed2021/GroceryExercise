@@ -30,7 +30,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, alwaysShow:Bo
 
 
 
-    fun setupAddButton(button:Button){
+    fun setupAddButton(button:TextView){
         button.setOnClickListener {
             showFull = true
             addToCartIfNot()

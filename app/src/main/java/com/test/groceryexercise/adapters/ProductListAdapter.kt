@@ -1,27 +1,24 @@
 package com.test.groceryexercise.adapters
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import com.test.groceryexercise.R
+import com.test.groceryexercise.activities.ListingActivity
 import com.test.groceryexercise.activities.ProductDetailActivity
 import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.Endpoints
 import com.test.groceryexercise.models.Product
 import com.test.groceryexercise.models.ProductResponse
 import kotlinx.android.synthetic.main.row_product.view.*
-import java.io.Serializable
 
 class ProductListAdapter(private val context: Activity, private val subId: Int) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
@@ -45,7 +42,7 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun init(product: Product) {
+        fun bind(product: Product) {
             itemView.text_name.text = product.productName
             val unit = when(product.unit) {
                 "1" -> "Each"
@@ -65,6 +62,13 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
                 intent.putExtra(Product.KEY, product)
                 context.startActivity(intent)
             }
+            val adapter = AmountButtonAdapter(context, product)
+            adapter.init(itemView.frame_button)
+            adapter.setOnAmountChangedListener {
+                if(context is ListingActivity){
+                        context.updateCartCount()
+                }
+            }
         }
 
     }
@@ -75,7 +79,7 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.init(mData[position])
+        holder.bind(mData[position])
     }
 
     override fun getItemCount(): Int {
