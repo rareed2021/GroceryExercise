@@ -9,6 +9,7 @@ class Endpoints {
         private const val URL_PRODUCTS = "products"
         private const val URL_PRODUCT_SUB = "sub"
         private const val URL_AUTH = "auth"
+        private const val URL_USER = "users"
         private const val URL_REGISTER = "${URL_AUTH}/register"
         private const val URL_LOGIN = "${URL_AUTH}/login"
 
@@ -19,6 +20,8 @@ class Endpoints {
 
         const val addressPost = "${Config.API_BASE}/${ URL_ADDRESS}/"
         const val orderPost = "${Config.API_BASE}/$URL_ORDER/"
+
+        fun putUserById(userId:String) = "${Config.API_BASE}/$URL_USER/$userId"
 
 
         fun subcategoriesByCategory(catId:Int):String = "${Config.API_BASE}/${URL_SUBCATEGORY}/${catId}"

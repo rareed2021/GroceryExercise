@@ -16,6 +16,10 @@ data class Address(
         const val CHECKOUT_KEY = "checkout_after"
         const val KEY = "ADDRESS"
     }
+
+    override fun toString(): String {
+        return "$houseNo $streetName\n$city $pincode"
+    }
 }
 
 
