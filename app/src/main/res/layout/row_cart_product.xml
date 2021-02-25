@@ -1,78 +1,93 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
+    android:padding="3dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
     android:background="?android:colorBackground"
-    android:padding="3dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image_product"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/product_image_description" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_product_name"
         style="@style/cart_product_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/image_product" />
-
-    <TextView
-        android:id="@+id/text_price"
-        style="@style/cart_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/text_mrp" />
+        android:text="Title"
+        app:layout_constraintBottom_toTopOf="@id/barrier_price"
+        app:layout_constraintStart_toEndOf="@id/image_product"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
 
     <TextView
         android:id="@+id/text_mrp"
         style="@style/cart_mrp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/image_product" />
+        android:text="@string/price_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_product" />
+
+    <TextView
+        android:id="@+id/text_price"
+        style="@style/cart_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_mrp"
+        />
     <TextView
         android:id="@+id/text_savings"
         style="@style/cart_savings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/text_price" />
+        android:text="@string/price_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_price"
+        />
 
-    <ImageView
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="text_mrp,text_price,text_savings" />
+
+    <!--<ImageView
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:paddingEnd="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frame_button"
         android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:src="@drawable/ic_baseline_delete_outline_24" />
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="12dp"
+        android:src="@drawable/ic_baseline_delete_outline_24" />-->
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/frame_button"
-        android:layout_centerVertical="true">
+        android:layout_width="120dp"
+        android:layout_height="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/frame_button">
         <include
             android:id="@+id/change_amount"
             layout="@layout/plus_minus_button" />
     </FrameLayout>
-    <!-- <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/text_amount"
-         android:layout_alignParentEnd="true"
-         android:layout_centerVertical="true"
-         style="@style/cart_amount"
-         />-->
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

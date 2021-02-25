@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import com.test.groceryexercise.app.Config
 import com.test.groceryexercise.app.DBHelper
 import com.test.groceryexercise.databinding.PlusMinusButtonBinding
-import com.test.groceryexercise.databinding.RowCartProductConstraintBinding
+import com.test.groceryexercise.databinding.RowCartProductBinding
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
 import com.test.groceryexercise.models.Product
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.row_cart_product.view.text_price
 
 class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : RecyclerView.Adapter<CartListAdapter.ViewHolder>(){
     private val mData  = data.toMutableList()
-    lateinit var binding :RowCartProductConstraintBinding
+    lateinit var binding :RowCartProductBinding
     lateinit var mHelper :ItemTouchHelper
     init{
         if(context is OnUpdateTotals)
@@ -100,7 +100,7 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
-        binding  = RowCartProductConstraintBinding.inflate(inflater,parent, false )
+        binding  = RowCartProductBinding.inflate(inflater,parent, false )
         //val view = LayoutInflater.from(context).inflate(R.layout.row_cart_product,parent,false)
         return ViewHolder(binding.root)
     }
