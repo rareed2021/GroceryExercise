@@ -49,8 +49,10 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
     }
 
 
-    open val showBackButton:Boolean = false
+    open val showBackButton:Boolean = true
     open val showCartButton:Boolean = true
+    open val toolbarTitle : String? =null
+
     abstract val contentResource : Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +121,9 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         setSupportActionBar(bar)
         if (showBackButton)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if(toolbarTitle!=null){
+            supportActionBar?.title = toolbarTitle
+        }
     }
 
 

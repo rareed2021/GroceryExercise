@@ -38,6 +38,9 @@ class MainActivity : ListingActivity() {
     var user: User? = null
     override val contentResource: Int = R.layout.activity_main
 
+    override val showBackButton: Boolean
+        get() = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)

@@ -36,7 +36,6 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         button.setOnClickListener {
             showFull = true
             addToCartIfNot()
-            Log.d("myApp", "Adding to cart.  Product:$mProduct")
             setupVisible()
             handler?.invoke(1)
         }
@@ -79,19 +78,15 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         buttonPlus.setOnClickListener {
             val item = mItem
             val id = itemId
-            Log.d("myApp","Item is $mItem")
             if (item != null) {
                 val check = db.getCartItem(id)
-                Log.d("myApp", "Doing check $check")
                 if(check==null){
                     db.addToCart(item)
                     val check2 = db.getCartItem(id)
-                    Log.d("myApp", "Doing check again $check2")
                 }
                 plusItem(item)
             } else {
                 val i = db.getCartItem(id)
-                Log.d("myApp", "getting cart item $i")
                 if (i != null) {
                     mItem = i
                     plusItem(i)
@@ -152,8 +147,6 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         if(showFull){
             layout.visibility=View.VISIBLE
             button.visibility=View.GONE
-            val view = mView ?: mBinding?.root
-            Log.d("myApp","Verbose: ${settings.verboseAmount}")
             amount.text =(mItem?.quantity?:0).toString() +  if(settings.verboseAmount){
                 " in cart"
             }else{
@@ -165,11 +158,9 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         }
     }
     private fun setupVisible(){
-        Log.d("myApp","Setting up ${mItem?.quantity}")
         val bind = mBinding
         val view=mView
         if(bind !=null){
-            Log.d("myApp","Binding fragment")
             setupVisible(bind.layoutFull, bind.textAmount, bind.buttonAdd)
         }else if (view!=null){
             setupVisible(view.layout_full, view.text_amount, view.button_add)

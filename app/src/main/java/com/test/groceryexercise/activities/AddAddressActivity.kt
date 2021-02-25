@@ -22,6 +22,8 @@ class AddAddressActivity : ListingActivity() {
     override val showBackButton: Boolean
         get() = true
 
+    override val toolbarTitle  = "New Address"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()

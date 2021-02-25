@@ -31,6 +31,9 @@ class CatListingActivity : ListingActivity() {
     override val showBackButton: Boolean
         get() = true
 
+    override val toolbarTitle: String?
+        get() = mCategory.catName
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +48,6 @@ class CatListingActivity : ListingActivity() {
         getData()
     }
 
-    override fun setupToolbar(bar:Toolbar) {
-        bar.title = mCategory.catName
-        super.setupToolbar(bar)
-    }
 
     private fun getData(){
         val queue = Volley.newRequestQueue(this)

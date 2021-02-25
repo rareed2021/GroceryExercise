@@ -10,12 +10,17 @@ import com.test.groceryexercise.adapters.AddressAdapter
 import com.test.groceryexercise.models.Address
 import kotlinx.android.synthetic.main.activity_address_list.*
 
-class AddressListActivity : AppCompatActivity() {
+class AddressListActivity : ListingActivity() {
     private lateinit var adapter:AddressAdapter
     var toCheckout = false
+    override val contentResource: Int
+        get() = R.layout.activity_address_list
+
+
+    override val showBackButton = true
+    override val toolbarTitle ="My Address"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_address_list)
         init()
     }
 

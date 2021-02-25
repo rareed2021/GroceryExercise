@@ -16,6 +16,9 @@ class AccountActivity : ListingActivity() {
     override val contentResource: Int
         get() = R.layout.activity_account
 
+    override val toolbarTitle = "My Account"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
