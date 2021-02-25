@@ -6,11 +6,11 @@ data class Order(
     val products: List<CartItem>,
     val shippingAddress: Address,
     val userId: String,
+    val user: User?=null,
+    val orderStatus: String?=null,
     val __v: Int?=null,
     val _id: String?=null,
     val date: String?=null,
-    val user: User?=null,
-    val orderStatus: String?=null,
 )
 
 data class OrderSummary(

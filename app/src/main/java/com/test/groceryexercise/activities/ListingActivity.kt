@@ -167,7 +167,7 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_order -> Toast.makeText(this, "Orders",Toast.LENGTH_SHORT).show()
+            R.id.menu_order -> startActivity(Intent(this, ListOrdersActivity::class.java))
             R.id.menu_account -> Toast.makeText(this, "Account",Toast.LENGTH_SHORT).show()
             R.id.menu_address -> startActivity(Intent(this, AddressListActivity::class.java))
             R.id.menu_refer -> Toast.makeText(this, "Refer",Toast.LENGTH_SHORT).show()

@@ -24,6 +24,7 @@ class Endpoints {
         fun subcategoriesByCategory(catId:Int):String = "${Config.API_BASE}/${URL_SUBCATEGORY}/${catId}"
         fun productsBySub(subId:Int):String = "${Config.API_BASE}/${URL_PRODUCTS}/${URL_PRODUCT_SUB}/${subId}"
         fun addressesById(userId:String):String = "${Config.API_BASE}/${URL_ADDRESS}/$userId"
+        fun ordersByUserId(userId:String):String = "${Config.API_BASE}/$URL_ORDER/$userId"
 
 
 

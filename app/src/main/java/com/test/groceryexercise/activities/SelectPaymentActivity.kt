@@ -3,7 +3,6 @@ package com.test.groceryexercise.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.se.omapi.Session
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -72,7 +71,8 @@ class SelectPaymentActivity : AppCompatActivity() {
             Payment("cash","completed"),
             db.cartItems,
             address,
-            user?._id?:""
+            user?._id?:"",
+            user,
         )
     }
 }
