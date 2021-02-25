@@ -21,6 +21,9 @@ class AccountActivity : ListingActivity() {
         init()
     }
 
+    override val showBackButton: Boolean
+        get() = true
+
     private fun init() {
         val user = SessionManager(this).user
         text_name.text = user?.firstName ?: "Guest"

@@ -19,6 +19,9 @@ class ListOrdersActivity : ListingActivity() {
     override val contentResource: Int
         get() = R.layout.activity_list_orders
 
+    override val showBackButton: Boolean
+        get() = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
