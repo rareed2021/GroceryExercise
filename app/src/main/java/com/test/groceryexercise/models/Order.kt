@@ -11,7 +11,17 @@ data class Order(
     val __v: Int?=null,
     val _id: String?=null,
     val date: String?=null,
-)
+){
+    fun calcTotal():CheckoutTotal{
+        val ret= CheckoutTotal()
+        for(product in this.products){
+            ret.orderAmount+=product.mrp*product.quantity
+            ret.ourPrice+=product.price*product.quantity
+        }
+        ret.totalAmount=ret.ourPrice
+        return ret
+    }
+}
 
 data class OrderSummary(
     val deliveryCharges: Int,

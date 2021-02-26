@@ -1,6 +1,7 @@
 package com.test.groceryexercise.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,11 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
     private val mData = orders.toMutableList()
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bind(order: Order) {
-            itemView.text_cost.text = "\$${order.orderSummary.totalAmount}"
+            if(order.orderSummary!=null) {
+                itemView.text_cost.text = "\$${order.orderSummary.totalAmount}"
+            }else{
+                itemView.text_cost.text = "\$${order.calcTotal().totalAmount}"
+            }
             itemView.text_email.text =  order.user?.email
             itemView.text_items.text = order.products.size.toString()
             if(order.date!=null) {
@@ -38,6 +43,7 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
     }
 
     override fun getItemCount(): Int {
+        Log.d("myApp","Number of orders: ${mData.size}",)
         return mData.size
     }
 }
