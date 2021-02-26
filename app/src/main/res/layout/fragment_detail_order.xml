@@ -1,0 +1,62 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView style="@style/order_card">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_house_number"
+                    style="@style/order_detail_field" />
+
+                <TextView
+                    android:id="@+id/text_streetname"
+                    style="@style/order_detail_field"
+                    android:layout_toEndOf="@id/text_house_number" />
+
+                <TextView
+                    android:id="@+id/text_city"
+                    style="@style/order_detail_field"
+                    android:layout_below="@id/text_house_number" />
+
+                <TextView
+                    android:id="@+id/text_pincode"
+                    style="@style/order_detail_field"
+                    android:layout_below="@id/text_house_number"
+                    android:layout_toEndOf="@id/text_city" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView style="@style/order_card">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_price"
+                    style="@style/order_detail_field" />
+                <TextView
+                    android:id="@+id/text_saved"
+                    android:layout_below="@id/text_price"
+                    android:textColor="@color/attention_text"
+                    style="@style/order_detail_field" />
+                <TextView
+                    android:id="@+id/text_date"
+                    android:layout_below="@id/text_saved"
+                    style="@style/order_detail_field" />
+                <TextView
+                    android:id="@+id/text_status"
+                    android:layout_below="@id/text_date"
+                    style="@style/order_detail_field" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

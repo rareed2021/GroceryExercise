@@ -31,7 +31,7 @@ class ApiHelper(private val context: Context) {
             Log.d("myApp",user._id)
             Log.d("myApp",Endpoints.putUserById(user._id?:""))
             val request = JsonObjectRequest(
-                Request.Method.PUT,
+                Request.Method.POST,
                 Endpoints.putUserById(user._id?:""),
                 params,
                 {

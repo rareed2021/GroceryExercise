@@ -2,6 +2,7 @@ package com.test.groceryexercise.models
 
 import android.content.Context
 import com.test.groceryexercise.app.SessionManager
+import java.io.Serializable
 
 data class Order(
     val orderSummary: CheckoutTotal?,
@@ -14,7 +15,7 @@ data class Order(
     val __v: Int?=null,
     val _id: String?=null,
     val date: String?=null,
-){
+):Serializable{
     /**
      * Sometimes orders arrive missing data that we are able to fill in locally.
      */
@@ -44,6 +45,9 @@ data class Order(
         ret.totalAmount=ret.ourPrice
         return ret
     }
+    companion object{
+        const val KEY = "ORDER"
+    }
 }
 
 data class OrderSummary(
@@ -59,7 +63,7 @@ data class Payment(
     val paymentMode: String,//cash
     val paymentStatus: String,//completed
     val _id: String?=null,
-)
+):Serializable
 
 
 data class ShippingAddress(

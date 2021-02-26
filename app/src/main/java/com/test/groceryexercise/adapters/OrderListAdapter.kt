@@ -10,7 +10,6 @@ import com.test.groceryexercise.R
 import com.test.groceryexercise.models.Order
 import kotlinx.android.synthetic.main.row_order.view.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 class OrderListAdapter(private val context: Context, orders:List<Order>) : RecyclerView.Adapter<OrderListAdapter.ViewHolder>(){
 
@@ -22,11 +21,15 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
             }else{
                 itemView.text_cost.text = "\$${order.calcTotal().totalAmount}"
             }
-            itemView.text_email.text =  order.user?.email
             itemView.text_items.text = order.products.size.toString()
             if(order.date!=null) {
                 val date = LocalDate.parse(order.date.split("T")[0])
-                itemView.text_date.text = order.date
+                itemView.text_date.text = "${date.month.name.titleCase()} ${date.dayOfMonth}, ${date.year}"
+            }
+            itemView.setOnClickListener {
+                if(context is OnChangeOrder){
+                    context.onChangeOrder(order)
+                }
             }
         }
     }
@@ -42,6 +45,10 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
 
     override fun getItemCount(): Int {
         return mData.size
+    }
+
+    interface OnChangeOrder{
+        fun onChangeOrder(order:Order)
     }
 }
 

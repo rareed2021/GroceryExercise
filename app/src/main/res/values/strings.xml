@@ -54,4 +54,6 @@
     <string name="welcome">Welcome</string>
     <string name="save">Save</string>
     <string name="default_number">0</string>
+    <string name="default_date">December 7, 1941</string>
+    <string name="items_label"> items</string>
 </resources>

@@ -104,5 +104,20 @@
         <item name="android:textColor">@color/header_text</item>
     </style>
 
+    <style name="order_card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="order_detail_field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginStart">6dp</item>
+    </style>
+
 
 </resources>

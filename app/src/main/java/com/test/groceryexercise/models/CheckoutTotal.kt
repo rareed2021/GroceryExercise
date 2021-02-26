@@ -1,5 +1,7 @@
 package com.test.groceryexercise.models
 
+import java.io.Serializable
+
 data class CheckoutTotal(
     var orderAmount:Double = 0.0,
     var discount:Double = 0.0,
@@ -7,4 +9,4 @@ data class CheckoutTotal(
     var totalAmount:Double = 0.0,
     var ourPrice:Double = 0.0,
     var _id:String? = null
-)
+):Serializable
