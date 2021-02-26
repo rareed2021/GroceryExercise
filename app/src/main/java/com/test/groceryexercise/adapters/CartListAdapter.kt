@@ -54,7 +54,6 @@ class CartListAdapter(val context : Context, data:List<CartItem> = listOf()) : R
         fun bind(product: CartItem) {
             itemView.text_price.text = "\$${product.price}"
             itemView.text_product_name.text = product.productName
-            //itemView.text_amount.text = product.quantity.toString()
             val binding = PlusMinusButtonBinding.bind(itemView.change_amount)
             val amountButtonAdapter = AmountButtonAdapter(context, product, AmountButtonSettings(alwaysShow = true))
             amountButtonAdapter.init(itemView.change_amount)

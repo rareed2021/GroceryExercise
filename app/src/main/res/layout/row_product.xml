@@ -28,6 +28,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_savings"
+        app:layout_constraintBottom_toBottomOf="@id/image_product"
+        app:layout_constraintStart_toStartOf="@id/image_product"
+        app:layout_constraintEnd_toEndOf="@id/image_product"
+        app:layout_constraintTop_toTopOf="@id/image_product"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.9"
+        android:background="@drawable/savings_circle"
+        android:textColor="@color/attention_text"
+        android:textSize="12sp"
+        android:padding="3dp"
+        android:text="@string/default_number"
+        android:visibility="gone"
+        />
+
+
+
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,15 +67,30 @@
         android:textStyle="bold" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_mrp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/image_product"
+        app:layout_constraintTop_toBottomOf="@id/text_name"
+        app:layout_constraintEnd_toStartOf="@id/text_price"
+        app:layout_constraintBottom_toTopOf="@id/text_description"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:text="@string/price_default"
+        android:visibility="gone"
+        />
+
+    <TextView
         android:id="@+id/text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/attention_text"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/text_mrp"
         app:layout_constraintTop_toBottomOf="@id/text_name"
         app:layout_constraintBottom_toTopOf="@id/text_description"
-        app:layout_constraintEnd_toStartOf="@id/frame_button"
         app:layout_constraintHorizontal_bias="0.0"
         android:text="@string/price_default"
-        app:layout_constraintStart_toEndOf="@id/image_product"
         />
 
     <TextView

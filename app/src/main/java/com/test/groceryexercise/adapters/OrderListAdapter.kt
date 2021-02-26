@@ -26,8 +26,6 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
             itemView.text_items.text = order.products.size.toString()
             if(order.date!=null) {
                 val date = LocalDate.parse(order.date.split("T")[0])
-                //itemView.text_date.text =
-                //    "${date.dayOfWeek.toString().titleCase()} ${date.month.toString().titleCase()} ${date.dayOfMonth}"
                 itemView.text_date.text = order.date
             }
         }
@@ -43,7 +41,6 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
     }
 
     override fun getItemCount(): Int {
-        Log.d("myApp","Number of orders: ${mData.size}",)
         return mData.size
     }
 }

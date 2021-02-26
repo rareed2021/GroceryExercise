@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/text_error"
-        android:textColor="@color/error_text"
+        android:textColor="@color/attention_text"
         android:visibility="gone"
         />
 </RelativeLayout>

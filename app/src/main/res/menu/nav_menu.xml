@@ -22,7 +22,7 @@
             android:title="My Address" />
 
     </group>
-    <group>
+    <!--<group>
     <item
         android:id="@+id/menu_rate"
         android:title="Rate our app" />
@@ -34,7 +34,7 @@
     <item
         android:id="@+id/menu_refer"
         android:title="Refer and Earn" />
-</group>
+</group>-->
     <group>
 
         <item

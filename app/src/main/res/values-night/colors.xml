@@ -11,7 +11,7 @@
     <color name="item_bg">#FF303030</color>
     <color name="header">#091937</color>
     <color name="header_text">#BEC3D3</color>
-    <color name="error_text">#932222</color>
+    <color name="attention_text">#932222</color>
     <color name="divider">#CECDCD</color>
     <color name="icon">#8E8D8D</color>
     <color name="icon_light">#D5D5D5</color>

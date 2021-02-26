@@ -38,8 +38,9 @@ class ListOrdersActivity : ListingActivity() {
             val request = StringRequest(
                 Request.Method.GET,
                 Endpoints.ordersByUserId(user._id),
-                {
-                    val response = Gson().fromJson(it,OrderResponse::class.java)
+                { responseString ->
+                    val response = Gson().fromJson(responseString,OrderResponse::class.java)
+                    val orders = response.data.map{it.cleanUpOrder(this)}
                     recycler_orders.adapter = OrderListAdapter(this,response.data)
                     recycler_orders.layoutManager = LinearLayoutManager(this)
                     Log.d("myApp","Got ${response.data.size} orders")

@@ -19,7 +19,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
     var initialItem :CartItem? = null
     var db :DBHelper = DBHelper(context)
     var showFull = settings.alwaysShow
-    var mBinding : PlusMinusButtonBinding?=null
+    //var mBinding : PlusMinusButtonBinding?=null
     var mView :View? = null
     private var handler : ((Int)->Unit)? = null
     constructor(context:Context, product: Product, settings: AmountButtonSettings = AmountButtonSettings()) : this(context, product._id, settings){
@@ -61,7 +61,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         setupPlusButton(view.button_plus)
 
     }
-    fun init(binding:PlusMinusButtonBinding){
+    /*fun init(binding:PlusMinusButtonBinding){
         mBinding = binding
         val product = mProduct
         if(mItem==null && product!=null){
@@ -71,7 +71,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         setupAddButton(binding.buttonAdd)
         setupMinusButton(binding.buttonMinus)
         setupPlusButton(binding.buttonPlus)
-    }
+    }*/
 
 
     private fun setupPlusButton(buttonPlus: TextView) {
@@ -158,11 +158,12 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         }
     }
     private fun setupVisible(){
-        val bind = mBinding
+        //val bind = mBinding
         val view=mView
-        if(bind !=null){
+        /*if(bind !=null){
             setupVisible(bind.layoutFull, bind.textAmount, bind.buttonAdd)
-        }else if (view!=null){
+        }else */
+        if (view!=null){
             setupVisible(view.layout_full, view.text_amount, view.button_add)
         }
     }

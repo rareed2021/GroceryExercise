@@ -173,9 +173,9 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
             R.id.menu_order -> startActivity(Intent(this, ListOrdersActivity::class.java))
             R.id.menu_account -> startActivity(Intent(this, AccountActivity::class.java))
             R.id.menu_address -> startActivity(Intent(this, AddressListActivity::class.java))
-            R.id.menu_refer -> Toast.makeText(this, "Refer",Toast.LENGTH_SHORT).show()
-            R.id.menu_help -> Toast.makeText(this, "Help",Toast.LENGTH_SHORT).show()
-            R.id.menu_rate -> Toast.makeText(this, "Rate",Toast.LENGTH_SHORT).show()
+//            R.id.menu_refer -> Toast.makeText(this, "Refer",Toast.LENGTH_SHORT).show()
+//            R.id.menu_help -> Toast.makeText(this, "Help",Toast.LENGTH_SHORT).show()
+//            R.id.menu_rate -> Toast.makeText(this, "Rate",Toast.LENGTH_SHORT).show()
             R.id.menu_signin -> startActivity(Intent(this, LoginActivity::class.java))
             R.id.menu_logout -> {
                 val builder = AlertDialog.Builder(this)

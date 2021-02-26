@@ -2,6 +2,7 @@ package com.test.groceryexercise.adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,14 @@ class ProductListAdapter(private val context: Activity, private val subId: Int) 
                 val intent = Intent(context, ProductDetailActivity::class.java)
                 intent.putExtra(Product.KEY, product)
                 context.startActivity(intent)
+            }
+            if(product.mrp>product.price){
+                val pct = (100*((product.price-product.mrp)/product.mrp)).toInt()
+                itemView.text_mrp.text = product.mrp.toString()
+                itemView.text_mrp.paintFlags = itemView.text_mrp.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                itemView.text_mrp.visibility=View.VISIBLE
+                itemView.text_savings.text = "$pct%"
+                itemView.text_savings.visibility=View.VISIBLE
             }
             val adapter = AmountButtonAdapter(context, product, AmountButtonSettings())
             adapter.init(itemView.frame_button)

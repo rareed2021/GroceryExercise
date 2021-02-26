@@ -1,17 +1,40 @@
 package com.test.groceryexercise.models
 
+import android.content.Context
+import com.test.groceryexercise.app.SessionManager
+
 data class Order(
-    val orderSummary: CheckoutTotal,
+    val orderSummary: CheckoutTotal?,
     val payment: Payment,
     val products: List<CartItem>,
     val shippingAddress: Address,
     val userId: String,
-    val user: User?=null,
-    val orderStatus: String?=null,
+    val user: User?, //not required to send user, but should anyway
+    val orderStatus: String?=null,//retrieved from api, but not sent
     val __v: Int?=null,
     val _id: String?=null,
     val date: String?=null,
 ){
+    /**
+     * Sometimes orders arrive missing data that we are able to fill in locally.
+     */
+    fun cleanUpOrder(context: Context):Order{
+        val session  = SessionManager(context)
+        val currentUser = session.user
+        var ret = this
+
+        ret = if(user==null && currentUser!=null){//ought not be null, but can be from api
+                ret.copy(user=currentUser)
+            }else{ret}
+        ret = if(orderSummary==null) {//shouldn't be null, but sometimes is when retrieved from api
+            ret.copy(orderSummary = ret.calcTotal())
+        }else {ret}
+        return ret
+    }
+
+    /**
+     * Calculate total cost of order
+     */
     fun calcTotal():CheckoutTotal{
         val ret= CheckoutTotal()
         for(product in this.products){
