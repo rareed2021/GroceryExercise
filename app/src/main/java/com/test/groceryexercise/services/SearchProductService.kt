@@ -26,11 +26,13 @@ internal const val DESCRIPTION_DROP = 12
 class SearchProductService : Service() {
     private val mNames = SimpleSuffixTrie<Product>()
     private val mDescription = SimpleSuffixTrie<Product>()
+    private val mCategories = SimpleSuffixTrie<Product>()
 
     private val binder = SearchBinder()
 
     override fun onCreate() {
         super.onCreate()
+        Log.d("grocerySearch","Creating service")
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(
             Request.Method.GET,
