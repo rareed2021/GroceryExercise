@@ -7,7 +7,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView style="@style/order_card">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_shipping"
+            android:text="@string/shipping_to"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="0dp"
+            android:paddingBottom="2dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="28dp"
+            />
+        <androidx.cardview.widget.CardView style="@style/order_card"
+            android:id="@+id/address_card"
+            >
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -52,11 +66,13 @@
                     android:id="@+id/text_date"
                     android:layout_below="@id/text_saved"
                     style="@style/order_detail_field" />
-                <TextView
-                    android:id="@+id/text_status"
-                    android:layout_below="@id/text_date"
-                    style="@style/order_detail_field" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_items"
+            android:background="@color/item_bg"
+            />
     </LinearLayout>
 </ScrollView>

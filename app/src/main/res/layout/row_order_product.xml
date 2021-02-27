@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="4dp"
+    android:padding="3dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
+    android:background="?android:colorBackground"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_product"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_product_name"
+        style="@style/cart_product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        app:layout_constraintBottom_toTopOf="@id/barrier_price"
+        app:layout_constraintStart_toEndOf="@id/image_product"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/text_mrp"
+        style="@style/cart_mrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_default"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_price"
+        app:layout_constraintStart_toEndOf="@id/image_product" />
+
+    <TextView
+        android:id="@+id/text_price"
+        style="@style/cart_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_mrp"
+        />
+    <TextView
+        android:id="@+id/text_savings"
+        style="@style/cart_savings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_default"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_price"
+        app:layout_constraintStart_toEndOf="@id/text_price"
+        />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="text_mrp,text_price,text_savings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/text_amount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_savings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/text_product_name"
+        app:layout_constraintVertical_bias="0.9"
+        />
+
+    <!--<ImageView
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frame_button"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="12dp"
+        android:src="@drawable/ic_baseline_delete_outline_24" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

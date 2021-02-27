@@ -156,13 +156,11 @@ abstract class ListingActivity : AppCompatActivity(), NavigationView.OnNavigatio
         when(item.itemId){
             android.R.id.home -> finish()
             R.id.menu_cart -> startActivity(Intent(this, ShowCartActivity::class.java))
-            //R.id.menu_signin -> startActivity(Intent(this, LoginActivity::class.java))
             R.id.menu_logout -> {
                 val session = SessionManager(this)
                 session.user=null
                 invalidateOptionsMenu()
                 setHeaderUI()
-                //intent.putExtra(User.KEY,null as Serializable?)
             }
         }
         return super.onOptionsItemSelected(item)

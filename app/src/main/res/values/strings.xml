@@ -56,4 +56,5 @@
     <string name="default_number">0</string>
     <string name="default_date">December 7, 1941</string>
     <string name="items_label"> items</string>
+    <string name="shipping_to">Shipping to:</string>
 </resources>

@@ -62,5 +62,15 @@ class ListOrdersActivity : ListingActivity(), OrderListAdapter.OnChangeOrder {
     override fun onChangeOrder(order: Order) {
         mPager.selectedOrder=order
         pager_order.currentItem=1
+        mPager.notifyDataSetChanged()
+    }
+
+    override fun onBackPressed() {
+        //Go back from order detail to order list
+        if(pager_order.currentItem==1){
+            pager_order.currentItem=0
+        }else{
+            finish()
+        }
     }
 }

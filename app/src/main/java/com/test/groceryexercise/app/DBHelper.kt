@@ -36,6 +36,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
 
     fun addToCart(product: Product, amount:Int = 1){
         if(amount>=0){
+            writableDatabase.beginTransaction()
             val content = ContentValues()
             content.put(cart_product_id, product._id)
             content.put(cart_product_amount,amount)

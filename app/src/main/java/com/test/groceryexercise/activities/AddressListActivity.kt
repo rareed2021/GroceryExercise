@@ -19,6 +19,8 @@ class AddressListActivity : ListingActivity() {
 
     override val showBackButton = true
     override val toolbarTitle ="My Address"
+    override val showCartButton: Boolean
+        get() = !toCheckout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
