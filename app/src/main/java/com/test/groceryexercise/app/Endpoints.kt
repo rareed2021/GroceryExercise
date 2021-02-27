@@ -17,6 +17,7 @@ class Endpoints {
         const val categories = "${Config.API_BASE}/${URL_CATEGORY}"
         const val register = "${Config.API_BASE}/${URL_REGISTER}"
         const val login = "${Config.API_BASE}/${URL_LOGIN}"
+        const val products = "${Config.API_BASE}/$URL_PRODUCTS/"
 
         const val addressPost = "${Config.API_BASE}/${ URL_ADDRESS}/"
         const val orderPost = "${Config.API_BASE}/$URL_ORDER/"

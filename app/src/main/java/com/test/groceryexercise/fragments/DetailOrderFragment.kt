@@ -40,7 +40,6 @@ class DetailOrderFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_detail_order, container, false)
         Log.d("myApp","Creating order view")
         mView = view
-        //init(view)
         return view
     }
 

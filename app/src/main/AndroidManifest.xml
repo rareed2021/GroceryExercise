@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryExercise">
-        <activity android:name=".activities.EditFieldActivity"></activity>
+        <service
+            android:name=".services.SearchProductService"
+            android:enabled="true"
+            android:stopWithTask="true"
+            android:exported="false">
+        </service>
+
+        <activity android:name=".activities.EditFieldActivity" />
         <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.ListOrdersActivity" />
         <activity android:name=".activities.OrderConfirmedActivity" />
