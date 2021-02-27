@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.test.groceryexercise.models.CartItem
 import com.test.groceryexercise.models.CheckoutTotal
 import com.test.groceryexercise.models.Product
@@ -22,6 +23,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
         const val cart_product_image = "image"
         const val column_total = "total"
         const val column_subtotal = "subtotal"
+        const val column_count = "quantity"
         val cart_columns = arrayOf(cart_product_id, cart_product_name, cart_product_image, cart_product_price, cart_product_amount, cart_product_mrp)
     }
 
@@ -36,7 +38,6 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
 
     fun addToCart(product: Product, amount:Int = 1){
         if(amount>=0){
-            writableDatabase.beginTransaction()
             val content = ContentValues()
             content.put(cart_product_id, product._id)
             content.put(cart_product_amount,amount)
@@ -44,7 +45,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
             content.put(cart_product_price,product.price)
             content.put(cart_product_name,product.productName)
             content.put(cart_product_image,product.image)
-            writableDatabase.insert(TABLE_CART, null, content)
+            addToCart(content)
         }
     }
 
@@ -57,8 +58,16 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
             content.put(cart_product_price,product.price)
             content.put(cart_product_name,product.productName)
             content.put(cart_product_image,product.image)
-            writableDatabase.insert(TABLE_CART, null, content)
+            addToCart(content)
         }
+    }
+
+    private fun addToCart(content:ContentValues){
+        val db = writableDatabase
+        db.beginTransaction()
+        db.insert(TABLE_CART, null, content)
+        db.setTransactionSuccessful()
+        db.endTransaction()
     }
     fun removeFromCart(id:String){
         writableDatabase.delete(TABLE_CART, "$cart_product_id = ?", arrayOf(id))
@@ -107,15 +116,17 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,1
                 ret.orderAmount = cursor.getDouble(cursor.getColumnIndex(column_subtotal))
                 ret.discount = ret.orderAmount -ret.totalAmount
             }
+            cursor.close()
             return ret
         }
 
     val cartSize : Int
         get(){
-            val columns = arrayOf("count($cart_product_id)")
+            val columns = arrayOf("count($cart_product_id) as $column_count")
             val cursor = readableDatabase.query(TABLE_CART,columns, null, null, null, null, null)
+            //Log.d("myApp","Cursor count is ${cursor.count}")
             val ret =  if(cursor.moveToFirst()){
-                cursor.getInt(0)
+                cursor.getInt(cursor.getColumnIndex(column_count))
             }else{
                 0
             }

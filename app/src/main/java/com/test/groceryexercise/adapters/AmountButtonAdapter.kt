@@ -126,6 +126,7 @@ class AmountButtonAdapter(val context: Context, val itemId:String, val settings 
         val item = mItem
         val product = mProduct
         if(item==null && product!=null){
+            Log.d("myApp","Adding to cart")
             db.addToCart(product,1)
             mItem = db.getCartItem(product._id)
         }

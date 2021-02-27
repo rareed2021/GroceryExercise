@@ -45,7 +45,7 @@ abstract class ListingActivity : AppCompatActivity(),
     protected var cartTextView: TextView? = null
     protected var mBound = false
     protected lateinit var contentContainer : LinearLayout
-    protected lateinit var mService: SearchProductService
+    protected var mService: SearchProductService? = null
     protected lateinit var searchBar: EditText
     protected lateinit var searchResults: RecyclerView
 
@@ -72,7 +72,8 @@ abstract class ListingActivity : AppCompatActivity(),
         }
 
     fun updateCartCount() {
-        currentCartCount = dbHelper.cartSize
+        val size = dbHelper.cartSize
+        currentCartCount = size
     }
 
     private fun setCartIconText() {
@@ -131,7 +132,6 @@ abstract class ListingActivity : AppCompatActivity(),
     }
 
     private fun setupSearchBar() {
-        Log.d("myApp","Binding service")
         Intent(this, SearchProductService::class.java).also {
             bindService(it, connection, Context.BIND_AUTO_CREATE)
         }
@@ -141,7 +141,6 @@ abstract class ListingActivity : AppCompatActivity(),
             searchTask.execute(searchBar.text.toString())
         }
         searchBar.setOnFocusChangeListener { v, hasFocus ->
-            Log.d("myApp","Focus Change $hasFocus")
             if(hasFocus) {
                 onOpenSearchWindow()
             }
@@ -299,7 +298,7 @@ abstract class ListingActivity : AppCompatActivity(),
         override fun doInBackground(vararg params: String?): Array<Product> {
             val str = params.firstOrNull()
             if(str!=null) {
-                return mService.searchProducts(str)
+                return mService?.searchProducts(str) ?: arrayOf()
             }
             return arrayOf()
         }
