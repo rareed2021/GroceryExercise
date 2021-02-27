@@ -37,7 +37,8 @@ import kotlinx.android.synthetic.main.template_content_container.view.*
 import kotlin.properties.Delegates
 
 abstract class ListingActivity : AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener {
+    NavigationView.OnNavigationItemSelectedListener,
+    SearchResultAdapter.ManageSearchWindow{
     protected lateinit var dbHelper: DBHelper
     protected lateinit var drawerLayout: DrawerLayout
     protected lateinit var navigationView: NavigationView
@@ -108,9 +109,9 @@ abstract class ListingActivity : AppCompatActivity(),
         drawerLayout.addView(contentContainer, 0)
         contentContainer.frame_content.addView(content)
         if (showSearchBar) {
-            contentContainer.addView(searchBar, 0)
             //results must be before content so that it will come on top when shown
             contentContainer.addView(searchResults, 0)
+            contentContainer.addView(searchBar, 0)
             searchResultAdapter = SearchResultAdapter(this)
             searchResults.adapter = searchResultAdapter
             searchResults.layoutManager = LinearLayoutManager(this)
@@ -135,16 +136,28 @@ abstract class ListingActivity : AppCompatActivity(),
             bindService(it, connection, Context.BIND_AUTO_CREATE)
         }
         searchBar.addTextChangedListener {
+            onOpenSearchWindow()
             val searchTask = GetSearchResultsTask()
             searchTask.execute(searchBar.text.toString())
         }
         searchBar.setOnFocusChangeListener { v, hasFocus ->
             Log.d("myApp","Focus Change $hasFocus")
             if(hasFocus) {
-                searchResults.visibility = View.VISIBLE
-                contentContainer.frame_content.visibility =View.GONE
+                onOpenSearchWindow()
             }
         }
+    }
+
+    override fun onCloseSearchWindow(adapter: SearchResultAdapter?) {
+        searchResults.visibility = View.GONE
+        contentContainer.frame_content.visibility=View.VISIBLE
+        searchBar.text.clear()
+    }
+
+
+    override fun onOpenSearchWindow(adapter: SearchResultAdapter?) {
+        searchResults.visibility = View.VISIBLE
+        contentContainer.frame_content.visibility =View.GONE
     }
 
     override fun onStop() {
@@ -155,6 +168,7 @@ abstract class ListingActivity : AppCompatActivity(),
     override fun onRestart() {
         super.onRestart()
         updateCartCount()
+        onCloseSearchWindow()
     }
 
     private fun setupNavDrawer() {
@@ -276,8 +290,7 @@ abstract class ListingActivity : AppCompatActivity(),
         when{
             drawerLayout.isDrawerOpen(GravityCompat.START)->drawerLayout.closeDrawer(GravityCompat.START)
             searchResults.visibility==View.VISIBLE -> {
-                searchResults.visibility = View.GONE
-                contentContainer.frame_content.visibility=View.VISIBLE
+                onCloseSearchWindow()
             }
             else -> super.onBackPressed()
         }

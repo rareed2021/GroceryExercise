@@ -9,6 +9,8 @@
         android:id="@+id/text_name"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
+        android:textColor="@color/foreground"
+        android:layout_marginStart="16dp"
         />
     <FrameLayout
         android:layout_width="match_parent"

@@ -25,6 +25,8 @@ class ListOrdersActivity : ListingActivity(), OrderListAdapter.OnChangeOrder {
     override val showBackButton: Boolean
         get() = true
 
+    override val showSearchBar = false
+
     lateinit var mPager: OrderTabAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

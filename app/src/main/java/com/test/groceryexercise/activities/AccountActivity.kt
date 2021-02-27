@@ -17,6 +17,7 @@ class AccountActivity : ListingActivity() {
         get() = R.layout.activity_account
 
     override val toolbarTitle = "My Account"
+    override val showSearchBar = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

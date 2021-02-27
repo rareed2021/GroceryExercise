@@ -23,6 +23,7 @@ class AddAddressActivity : ListingActivity() {
         get() = true
 
     override val toolbarTitle  = "New Address"
+    override val showSearchBar = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

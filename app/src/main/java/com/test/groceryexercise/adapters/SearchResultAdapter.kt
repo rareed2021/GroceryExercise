@@ -1,11 +1,14 @@
 package com.test.groceryexercise.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.test.groceryexercise.R
+import com.test.groceryexercise.activities.ProductDetailActivity
 import com.test.groceryexercise.models.Product
 import kotlinx.android.synthetic.main.row_search_result.view.*
 
@@ -14,6 +17,17 @@ class SearchResultAdapter(private val context: Context) :RecyclerView.Adapter<Se
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(product: Product) {
             itemView.text_name.text =product.productName
+            itemView.setOnClickListener {
+                val intent = Intent(context, ProductDetailActivity::class.java)
+                intent.putExtra(Product.KEY, product)
+                if(context is ManageSearchWindow){
+                    Log.d("myApp","Closing search window")
+                    context.onCloseSearchWindow(this@SearchResultAdapter)
+                }else{
+                    Log.d("myApp","Cannot close search window")
+                }
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -34,5 +48,14 @@ class SearchResultAdapter(private val context: Context) :RecyclerView.Adapter<Se
         mData.clear()
         mData.addAll(vals)
         notifyDataSetChanged()
+    }
+
+    /**
+     * Interface for objects that have a search window to open or close.
+     * Should be implemented on a [Context]
+     */
+    interface ManageSearchWindow{
+        fun onCloseSearchWindow(adapter : SearchResultAdapter?=null)
+        fun onOpenSearchWindow(adapter : SearchResultAdapter?=null)
     }
 }
