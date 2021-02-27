@@ -34,6 +34,12 @@ data class Order(
     }
 
     /**
+     * Number of overall items in order
+     */
+    val totalItems : Int
+        get() =products.map{it.quantity}.sum()
+
+    /**
      * Calculate total cost of order
      */
     fun calcTotal():CheckoutTotal{

@@ -29,6 +29,8 @@ class ListOrdersActivity : ListingActivity(), OrderListAdapter.OnChangeOrder {
 
     lateinit var mPager: OrderTabAdapter
 
+    var selectedOrder :Order? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -62,6 +64,7 @@ class ListOrdersActivity : ListingActivity(), OrderListAdapter.OnChangeOrder {
     }
 
     override fun onChangeOrder(order: Order) {
+        selectedOrder = order
         mPager.selectedOrder=order
         pager_order.currentItem=1
         mPager.notifyDataSetChanged()

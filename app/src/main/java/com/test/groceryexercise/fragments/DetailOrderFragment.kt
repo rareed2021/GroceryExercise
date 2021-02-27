@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
+import com.test.groceryexercise.activities.ListOrdersActivity
 import com.test.groceryexercise.adapters.OrderProductAdapter
 import com.test.groceryexercise.models.Order
 import kotlinx.android.synthetic.main.fragment_detail_order.view.*
@@ -68,7 +69,7 @@ class DetailOrderFragment : Fragment() {
     }
 
     private fun init(view: View) {
-        val order = mOrder
+        val order = (activity as? ListOrdersActivity)?.selectedOrder ?: mOrder
         if(order!=null) {
             Log.d("myApp","Drawing order")
             //shipping address

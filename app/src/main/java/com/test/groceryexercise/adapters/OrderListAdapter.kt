@@ -21,7 +21,7 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
             }else{
                 itemView.text_cost.text = "\$${order.calcTotal().totalAmount}"
             }
-            itemView.text_items.text = order.products.size.toString()
+            itemView.text_items.text = order.totalItems.toString()
             if(order.date!=null) {
                 val date = LocalDate.parse(order.date.split("T")[0])
                 itemView.text_date.text = "${date.month.name.titleCase()} ${date.dayOfMonth}, ${date.year}"
