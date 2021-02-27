@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.groceryexercise.R
 import com.test.groceryexercise.adapters.AddressAdapter
+import com.test.groceryexercise.app.SessionManager
 import com.test.groceryexercise.models.Address
 import kotlinx.android.synthetic.main.activity_address_list.*
 
@@ -26,13 +27,25 @@ class AddressListActivity : ListingActivity() {
         init()
     }
 
+    override fun onStart() {
+        super.onStart()
+        toCheckout = intent.getBooleanExtra(Address.CHECKOUT_KEY,false)
+        adapter = AddressAdapter(this,toCheckout)
+        adapter.init(recycler_addresses)
+        if(toCheckout){
+            val user = SessionManager(this).user
+            if(user==null){
+                //if we're not logged in, go to login page.
+                startActivity(Intent(this,LoginActivity::class.java))
+            }
+        }
+    }
+
     private fun init() {
         toCheckout = intent.getBooleanExtra(Address.CHECKOUT_KEY,false)
         if(toCheckout){
             text_select_address.visibility= View.VISIBLE
         }
-        adapter = AddressAdapter(this,toCheckout)
-        adapter.init(recycler_addresses)
         button_add_address.setOnClickListener {
             startActivity(Intent(this,AddAddressActivity::class.java))
         }
