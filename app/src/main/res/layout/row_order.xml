@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
@@ -15,12 +16,14 @@
         android:orientation="vertical"
         android:padding="6dp">
 
+
         <TextView
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_date"
             android:textSize="24sp"
+            android:textColor="@color/foreground"
             android:textStyle="bold" />
 
         <TextView
@@ -53,6 +56,27 @@
             android:layout_marginStart="5dp"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            android:id="@+id/icon_selected"
+            android:src="@drawable/ic_baseline_arrow_forward"
+            android:contentDescription="@string/selected_order" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/icon_cart"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
+            app:tint="@color/header"
+            android:contentDescription="@string/cart_prompt" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

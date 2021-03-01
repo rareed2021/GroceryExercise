@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.test.groceryexercise.R
+import com.test.groceryexercise.activities.ListOrdersActivity
 import com.test.groceryexercise.models.Order
 import kotlinx.android.synthetic.main.row_order.view.*
 import java.time.LocalDate
@@ -16,6 +17,8 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
     private val mData = orders.toMutableList()
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bind(order: Order) {
+            val selected = (context as?ListOrdersActivity)?.selectedOrder
+            val isSelected = selected == order
             if(order.orderSummary!=null) {
                 itemView.text_cost.text = "\$${order.orderSummary.totalAmount}"
             }else{
@@ -26,7 +29,16 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
                 val date = LocalDate.parse(order.date.split("T")[0])
                 itemView.text_date.text = "${date.month.name.titleCase()} ${date.dayOfMonth}, ${date.year}"
             }
+            itemView.icon_cart.visibility = if(isSelected)View.GONE else View.VISIBLE
+            itemView.icon_selected.visibility = if(isSelected)View.VISIBLE else View.GONE
             itemView.setOnClickListener {
+                if(context is ListOrdersActivity){
+                    val pos = mData.indexOf(context.selectedOrder)
+                    if(pos>0){
+                        notifyItemChanged(pos)
+                    }
+                    notifyItemChanged(adapterPosition)
+                }
                 if(context is OnChangeOrder){
                     context.onChangeOrder(order)
                 }
