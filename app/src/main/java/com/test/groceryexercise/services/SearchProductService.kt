@@ -18,10 +18,10 @@ import com.test.groceryexercise.util.SimpleSuffixTrie
 //Currently using naive algorithm for trie construction.
 //If I have time I can switch to something more sophisticated later, but it's fine for now
 //
-internal const val MAX_DESCRIPTION = 25
+internal const val MAX_DESCRIPTION = 16
 //This is how many get dropped from description before adding next chunk
 //Should be less than max size, to prevent aliasing issues
-internal const val DESCRIPTION_DROP = 12
+internal const val DESCRIPTION_DROP = 8
 
 class SearchProductService : Service() {
     private val mNames = SimpleSuffixTrie<Product>()

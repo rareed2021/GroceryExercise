@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.test.groceryexercise.R
 import com.test.groceryexercise.activities.ListOrdersActivity
@@ -31,10 +32,17 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
             }
             itemView.icon_cart.visibility = if(isSelected)View.GONE else View.VISIBLE
             itemView.icon_selected.visibility = if(isSelected)View.VISIBLE else View.GONE
+            itemView.recycler_order_items.adapter = ProductImageAdapter(
+                context,
+                order.products.map{it.image},
+                Pair(180,180)
+            )
+            itemView.recycler_order_items.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             itemView.setOnClickListener {
                 if(context is ListOrdersActivity){
                     val pos = mData.indexOf(context.selectedOrder)
                     if(pos>0){
+
                         notifyItemChanged(pos)
                     }
                     notifyItemChanged(adapterPosition)

@@ -77,6 +77,24 @@
             android:src="@drawable/ic_baseline_shopping_cart_24"
             app:tint="@color/header"
             android:contentDescription="@string/cart_prompt" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/foreground"
+            android:layout_below="@id/text_cost"
+            android:layout_marginBottom="6dp"
+            android:id="@+id/divider"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_order_items"
+            android:padding="18dp"
+            android:layout_below="@id/divider"
+            />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
