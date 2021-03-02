@@ -24,8 +24,7 @@
             >
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                style="@style/order_card_inside"   >
 
                 <TextView
                     android:id="@+id/text_house_number"
@@ -52,8 +51,7 @@
         <androidx.cardview.widget.CardView style="@style/order_card">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                style="@style/order_card_inside" >
                 <TextView
                     android:id="@+id/text_price"
                     style="@style/order_detail_field" />

@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/image_main"
     android:scaleType="fitXY"
-    android:paddingEnd="6dp"
-    android:paddingStart="6dp"
-    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    android:paddingEnd="3dp"
+    android:paddingStart="3dp"
+    android:layout_width="60dp" android:layout_height="60dp">
 </ImageView>

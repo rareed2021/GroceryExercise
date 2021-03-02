@@ -108,7 +108,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">8dp</item>
-        <item name="android:padding">26dp</item>
         <item name="android:elevation">4dp</item>
     </style>
 
@@ -117,6 +116,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">24sp</item>
         <item name="android:layout_marginStart">6dp</item>
+    </style>
+
+    <style name="order_card_inside">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">18dp</item>
     </style>
 
 

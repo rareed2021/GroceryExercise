@@ -202,9 +202,11 @@ abstract class ListingActivity : AppCompatActivity(),
         val signin = menu.findItem(R.id.menu_signin)
         val account = menu.findItem(R.id.menu_account)
         val logout = menu.findItem(R.id.menu_logout)
+        val order = menu.findItem(R.id.menu_order)
         signin.isVisible = !loggedIn
         account.isVisible = loggedIn
         logout.isVisible = loggedIn
+        order.isVisible = loggedIn
     }
 
     open fun setupToolbar(bar: Toolbar) {

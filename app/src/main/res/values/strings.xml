@@ -61,4 +61,5 @@
     <string name="edit_address_button">Edit Address</string>
     <string name="selected_order">Selected Order</string>
     <string name="cart_prompt">Cart Prompt</string>
+    <string name="default_time">00:00 AM</string>
 </resources>

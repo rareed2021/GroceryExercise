@@ -11,7 +11,9 @@ import com.test.groceryexercise.R
 import com.test.groceryexercise.activities.ListOrdersActivity
 import com.test.groceryexercise.models.Order
 import kotlinx.android.synthetic.main.row_order.view.*
-import java.time.LocalDate
+import java.time.*
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class OrderListAdapter(private val context: Context, orders:List<Order>) : RecyclerView.Adapter<OrderListAdapter.ViewHolder>(){
 
@@ -27,18 +29,16 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
             }
             itemView.text_items.text = order.totalItems.toString()
             if(order.date!=null) {
-                val date = LocalDate.parse(order.date.split("T")[0])
-                itemView.text_date.text = "${date.month.name.titleCase()} ${date.dayOfMonth}, ${date.year}"
+                val instant = Instant.parse(order.date)
+//                val date = LocalDate.parse(order.date.split("T")[0])
+//                val time  = LocalTime.parse(order.date.split("T")[1].dropLast(2))
+                val datetime= instant.atZone(ZoneId.of("America/Chicago"))
+                itemView.text_date.text = datetime.format(DateTimeFormatter.ofPattern("LLL d"))//"${date.mon.name.titleCase()} ${date.dayOfMonth}, ${date.year}"
+                itemView.text_time.text = datetime.format(DateTimeFormatter.ofPattern("hh:mm a"))
             }
-            itemView.icon_cart.visibility = if(isSelected)View.GONE else View.VISIBLE
+            //itemView.icon_cart.visibility = if(isSelected)View.GONE else View.VISIBLE
             itemView.icon_selected.visibility = if(isSelected)View.VISIBLE else View.GONE
-            itemView.recycler_order_items.adapter = ProductImageAdapter(
-                context,
-                order.products.map{it.image},
-                Pair(180,180)
-            )
-            itemView.recycler_order_items.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            itemView.setOnClickListener {
+            val clickListener = {_:View->
                 if(context is ListOrdersActivity){
                     val pos = mData.indexOf(context.selectedOrder)
                     if(pos>0){
@@ -51,6 +51,16 @@ class OrderListAdapter(private val context: Context, orders:List<Order>) : Recyc
                     context.onChangeOrder(order)
                 }
             }
+            itemView.setOnClickListener(clickListener)
+            itemView.recycler_order_items.adapter = ProductImageAdapter(
+                context,
+                order.products.map{it.image},
+                Pair(200,200)
+            )
+            itemView.recycler_order_items.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            itemView.recycler_order_items.setOnClickListener(clickListener)
+            itemView.recycler_order_items.setOnLongClickListener { clickListener(it);false }
+            itemView.recycler_order_items.isLayoutFrozen=true
         }
     }
 
