@@ -36,6 +36,9 @@ import kotlinx.android.synthetic.main.nav_header.view.*
 import kotlinx.android.synthetic.main.template_content_container.view.*
 import kotlin.properties.Delegates
 
+/**
+ * Abstract [AppCompatActivity] that initializes menu, nav drawer, and search for activities
+ */
 abstract class ListingActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
     SearchResultAdapter.ManageSearchWindow{
@@ -87,14 +90,26 @@ abstract class ListingActivity : AppCompatActivity(),
     open val showSearchBar: Boolean = true
     open val toolbarTitle: String? = null
 
+
+    /**
+     * Primary layout resource for activity.
+     * This should not be manually set in onCreate
+     */
     abstract val contentResource: Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Actual content needs to be inside nav drawer, so make this our top level element
         setContentView(R.layout.nav_drawer)
         setupViews()
     }
 
+    /**
+     * This function inflates and adds the various views needed for search, menu, and content
+     */
     fun setupViews() {
+        //Linear layout that we can put various UI views into
+        //linear because it makes handling adding search and results easier.
+        //includes a child frame_layout that makes hiding main activity content easier
         contentContainer = LayoutInflater.from(this)
             .inflate(R.layout.template_content_container, drawer_layout,false) as LinearLayout
         val content = LayoutInflater.from(this).inflate(contentResource, contentContainer.frame_content, false)
@@ -103,10 +118,13 @@ abstract class ListingActivity : AppCompatActivity(),
         _currentCartCount = dbHelper.cartSize
         drawerLayout = drawer_layout
         navigationView = nav_view
+        //the search bar itself
         searchBar = LayoutInflater.from(this)
             .inflate(R.layout.template_searchbar, drawer_layout, false) as EditText
+        //a results page that will
         searchResults = LayoutInflater.from(this)
             .inflate(R.layout.template_search_results, drawer_layout, false) as RecyclerView
+        //Anything added to drawerLayout MUST be non-last, otherwise the nav view breaks
         drawerLayout.addView(contentContainer, 0)
         contentContainer.frame_content.addView(content)
         if (showSearchBar) {
@@ -166,13 +184,15 @@ abstract class ListingActivity : AppCompatActivity(),
 
     override fun onRestart() {
         super.onRestart()
+        //could have been changed whatever we were at
         updateCartCount()
+        //if we've left the activity already, we ought to close the bar
         onCloseSearchWindow()
     }
 
     private fun setupNavDrawer() {
         navigationView.setNavigationItemSelectedListener(this)
-        setHeaderUI()
+        setNavMenu()
         val bar = toolbar
         if (bar != null && !showBackButton) {
             val toggle = ActionBarDrawerToggle(this, drawerLayout, bar, 0, 0)
@@ -183,11 +203,14 @@ abstract class ListingActivity : AppCompatActivity(),
 
 
     fun updateHeader() {
-        setHeaderUI()
+        setNavMenu()
     }
 
 
-    private fun setHeaderUI() {
+    /**
+     * Sets the menu options on side menu
+     */
+    private fun setNavMenu() {
         val header = navigationView.getHeaderView(0)
         val session = SessionManager(this)
         val user = session.user
@@ -219,6 +242,7 @@ abstract class ListingActivity : AppCompatActivity(),
     }
 
 
+    //mostly setting up the cart.
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val sessionManager = SessionManager(this)
@@ -248,7 +272,7 @@ abstract class ListingActivity : AppCompatActivity(),
                 val session = SessionManager(this)
                 session.user = null
                 invalidateOptionsMenu()
-                setHeaderUI()
+                setNavMenu()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -269,7 +293,7 @@ abstract class ListingActivity : AppCompatActivity(),
                             val session = SessionManager(this@ListingActivity)
                             session.user = null
                             this@ListingActivity.invalidateOptionsMenu()
-                            this@ListingActivity.setHeaderUI()
+                            this@ListingActivity.setNavMenu()
                         }
                     })
                     .setNegativeButton("Stay"
@@ -281,6 +305,7 @@ abstract class ListingActivity : AppCompatActivity(),
         return true
     }
 
+    //in case of search or open drawer, want to get rid of those first
     override fun onBackPressed() {
         when{
             drawerLayout.isDrawerOpen(GravityCompat.START)->drawerLayout.closeDrawer(GravityCompat.START)
@@ -290,6 +315,11 @@ abstract class ListingActivity : AppCompatActivity(),
             else -> super.onBackPressed()
         }
     }
+
+    /**
+     * [AsyncTask] to handle search results
+     * Fetches data from service, then updates search UI
+     */
     private inner class GetSearchResultsTask() : AsyncTask<String,Unit, Array<Product>>(){
         override fun doInBackground(vararg params: String?): Array<Product> {
             val str = params.firstOrNull()
